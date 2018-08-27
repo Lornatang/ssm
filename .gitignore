@@ -63,3 +63,4 @@ cmake-build-debug/Project.cbp
 cmake-build-debug/cmake_install.cmake
 cmake-build-debug/lornabk.cbp
 .idea
+/build/
