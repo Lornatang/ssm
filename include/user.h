@@ -18,24 +18,49 @@ class User {
   string name;
   int passwd;
  public:
-  friend ostream &operator<<(ostream &os, User &stu);
-  friend istream &operator>>(istream &is, User &stu);
+  friend ostream &operator<<(ostream &os, User &user);
+  friend istream &operator>>(istream &is, User &user);
 
   User();
   ~User();
-  int getId() const;
-  string getName() const;
-  int getPasswd() const;
+  void setPasswd(int passwd) {
+    User::passwd = passwd;
+  }
+  int getId() const {
+    return id;
+  }
+  void setId(int id) {
+    User::id = id;
+  }
+  const string &getName() const {
+    return name;
+  }
+  void setName(const string &name) {
+    User::name = name;
+  }
+  int getPasswd() const {
+    return passwd;
+  }
 
-  void setId(int id);
-  void setName(string name);
-  void setpasswd(int passwd);
-
-  bool loadData(const map<int, User> &u1, const string &pathName);
-  bool saveData(const map<int, User> &u1, const string &pathName);
+  bool loadData(map<int, User> &u, const string &pathName);
+  bool saveData(const map<int, User> &u, const string &pathName);
   bool accountEnder(int id, int passwd);
   void accountCreate(int id, const string &name, int passwd);
+  // 增
+  User addAStu(std::map<int, User> &u, User &stu);
 
+  // 删
+  bool deleteStuById(std::map<int, User> &u, const int &id);
+
+  // 改
+  User updateStu(std::map<int, User> &u, const User &stu);
+
+  // 查 by id
+  User findById(const std::map<int, User> &u, const int &id) const;
+
+  // showAll
+  void showAll(const std::map<int, User> &u) const;
+  
 };
 
 #endif //LORNABK_USER_H
