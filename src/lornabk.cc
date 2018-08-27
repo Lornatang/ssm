@@ -12,7 +12,7 @@ using namespace std;
 
 int main() {
 
-  string pathName = "data/stu.dat";
+  string pathName = "../data/stu.dat";
 
   map<int, User> stu_v1;
 
@@ -45,6 +45,7 @@ int main() {
     }
 
     cin >> operateType;
+    getchar();
   }
 
   return 0;
