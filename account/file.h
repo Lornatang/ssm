@@ -8,10 +8,8 @@
 #include "user.h"
 
 bool loadAccountData() {
-  User user;
   // buffer size
   char buffer[128];
-
   // file status
   bool flag = true;
 
@@ -29,8 +27,9 @@ bool loadAccountData() {
     }
   }
   cout << endl;
-  cout << ("---------------------------------------------------------------------------") << endl;
+  cout << ("---------------------------------------------------------------------------");
   return flag;
 }
+
 
 #endif //LORNABK_FILE_H

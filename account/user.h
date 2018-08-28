@@ -49,10 +49,7 @@ class User {
     User::tel = tel;
   }
 
-  void create();
-  void delete();
-  void search();
-  void modify();
+  void Create();
 };
 
 #endif //LORNABK_USER_H
