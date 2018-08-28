@@ -15,7 +15,6 @@ int main(int argc, char const *argv[]) {
 
   // load data from file
   system("clear");
-  cout << ("Loading data...!\n\n");
 
   if (argc < 2) {
     cerr << ("Please input '-h' or '--help' get help") << endl;
@@ -25,26 +24,52 @@ int main(int argc, char const *argv[]) {
     cout << ("-v or --version \t --get app version.           \n");
     cout << ("-c or --create  \t --create account.            \n");
     cout << ("-s or --show    \t --print account information. \n");
+    return 0;
 
   } else if ((strcmp(argv[1], "-v") == 0) || (strcmp(argv[1], "--version") == 0)) {
     cout << ("Book store version 0.0.1\n"
              "Thread model: posix\n"
              "InstalledDir: /Library/Developer/CommandLineTools/usr/bin\n");
+    return 0;
   } else if ((strcmp(argv[1], "-c") == 0) || (strcmp(argv[1], "--create") == 0)) {
-    if (user.Create())
-      cout << ("Account create complete.\n");
+    // verify account
+    if (user.Verify()) {
+      cout << ("Account verify complete.\n");
+      sleep(1);
+    } else {
+      cerr << ("Account verify error.\n");
+      cerr << ("Exit create account. If you create account, please restart app.\n");
+      return -1;
+    }
 
-    else {
+    if (user.Create()) {
+      cout << ("Account create complete.\n");
+      return 0;
+    } else {
       while (errCount < 2) {
         cerr << ("\nWait 3s to pass...\n");
         sleep(3);
+        cerr << ("Id is exist! Please input other number.\n");
         user.Create();
         errCount += 1;
       }
+      cerr << ("Account create error.\n");
       cerr << ("\nError count have 3. exit create account. If you create account, please restart app.\n");
+      return -1;
     }
-  } else if ((strcmp(argv[1], "-s") == 0) || (strcmp(argv[1], "--show") == 0)){
-    user.show();
+  } else if ((strcmp(argv[1], "-s") == 0) || (strcmp(argv[1], "--show") == 0)) {
+    // verify account
+    if (user.Verify()) {
+      cout << ("Account verify complete.\n");
+      cout << ("Searching data...\n");
+      sleep(1);
+      user.show();
+      return 0;
+    } else {
+      cerr << ("Account verify error.\n");
+      cerr << ("Exit create account. If you create account, please restart app.\n");
+      return -1;
+    }
   } else {
     cerr << ("Please use '-h' or '--help' get help\n") << endl;
   }

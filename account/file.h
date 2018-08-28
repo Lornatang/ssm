@@ -5,7 +5,6 @@
 /**
  * Class: User
  *            1.void show() show account data.
- * bool loadAccountData() return (vector)
  * */
 
 #ifndef LORNABK_FILE_H
@@ -26,15 +25,16 @@ void User::show() {
   }
   else {
     cout.flags(ios::left);
+    cout << ("---------------------------------------------------------------------------\n");
     cout << setw(20) << ("id") << setw(20) << ("passwd") << setw(20) << ("name") << setw(20) << ("tel") << endl;
-    cout << ("---------------------------------------------------------------------------") << endl;
+    cout << ("---------------------------------------------------------------------------\n");
     while (!file.eof()) {
       file.getline(buffer, 100);
       cout << buffer;
     }
   }
   cout << endl;
-  cout << ("---------------------------------------------------------------------------");
+  cout << ("---------------------------------------------------------------------------\n");
 }
 
 #endif //LORNABK_FILE_H

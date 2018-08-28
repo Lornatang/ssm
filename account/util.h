@@ -6,8 +6,6 @@
  * Class: User
  *            1.bool Create()
  *            2.bool Verify()
- * Class: none
- * bool checkAccount(const string &id)
  * */
 
 #ifndef LORNABK_UTIL_H
@@ -25,7 +23,6 @@ bool checkAccount(const string &id) {
     string word;
     while (ifs >> word) {
       if (word == id) {
-        cerr << "Id is exist! Please input other numbers.\n";
         flag = false;
         return flag;
       }
@@ -61,7 +58,6 @@ bool User::Create() {
     cin >> user.tel;
   }
 
-
   // if id don't exist run!
   if (flag) {
     ofstream ofs(filePath, ios::app);
@@ -82,28 +78,16 @@ bool User::Verify() {
   // set return
   User user;
   bool flag = true;
-  int errCount = 0;
 
   system("clear");
 
   cout << "Please input your account information." << endl;
-
   cout << ("Id:");
   cin >> user.id;
-  cout << ("Password:");
-  cin >> user.passwd;
-  cout << ("Name:");
-  cin >> user.name;
-  cout << ("Telephone:");
-  cin >> user.tel;
 
-  while (errCount < 3) {
+  if (checkAccount(user.id))
+    flag = false;
 
-    if (flag) {
-      flag = checkAccount(user.id);
-    }
-    errCount += 1;
-  }
   return flag;
 }
 

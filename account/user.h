@@ -2,6 +2,9 @@
 // Created by mac on 2018/8/28.
 //
 
+/**
+ * Class User base*/
+
 #ifndef LORNABK_USER_H
 #define LORNABK_USER_H
 
