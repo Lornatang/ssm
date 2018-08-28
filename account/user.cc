@@ -26,7 +26,7 @@ int main(int argc, char const *argv[]) {
     return 0;
 
   } else if ((strcmp(argv[1], "-v") == 0) || (strcmp(argv[1], "--version") == 0)) {
-    cout << ("Book store version 0.0.2\n"
+    cout << ("Book store version 0.0.3\n"
              "Thread model: posix\n"
              "InstalledDir: /Library/Developer/CommandLineTools/usr/bin\n");
     return 0;
