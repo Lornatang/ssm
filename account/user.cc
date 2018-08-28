@@ -3,6 +3,7 @@
 //
 
 #include "user.h"
+#include "file.h"
 using namespace std;
 
 int main(int argc, char const *argv[]) {
