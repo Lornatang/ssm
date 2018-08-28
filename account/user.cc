@@ -1,11 +1,11 @@
 //
 // Created by mac on 2018/8/28.
+// Handler interface
 //
 
 #include "user.h"
 #include "file.h"
 #include "util.h"
-#include <unistd.h>
 using namespace std;
 
 int errCount = 0;
@@ -13,7 +13,6 @@ int errCount = 0;
 int main(int argc, char const *argv[]) {
   User user;
 
-  // load data from file
   system("clear");
 
   if (argc < 2) {

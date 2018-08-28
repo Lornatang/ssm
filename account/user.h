@@ -1,5 +1,6 @@
 //
 // Created by mac on 2018/8/28.
+// Basic User class
 //
 
 /**
@@ -19,6 +20,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <vector>
+#include <unistd.h>
 using namespace std;
 
 class User {
