@@ -15,19 +15,20 @@
 #include <string>
 #include <cstdlib>
 #include <iomanip>
+#include <vector>
 using namespace std;
 
 class User {
  private:
-  int id;
+  string id;
   string passwd;
   string name;
   string tel;
  public:
-  int getId() const {
+  const string &getId() const {
     return id;
   }
-  void setId(int id) {
+  void setId(const string &id) {
     User::id = id;
   }
   const string &getPasswd() const {
@@ -49,7 +50,9 @@ class User {
     User::tel = tel;
   }
 
-  void Create();
+  bool Create();
+  bool Verify();
+  void show();
 };
 
 #endif //LORNABK_USER_H

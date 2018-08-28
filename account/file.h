@@ -2,21 +2,28 @@
 // Created by mac on 2018/8/28.
 //
 
+/**
+ * Class: User
+ *            1.void show() show account data.
+ * bool loadAccountData() return (vector)
+ * */
+
 #ifndef LORNABK_FILE_H
 #define LORNABK_FILE_H
 
 #include "user.h"
+using namespace std;
 
-bool loadAccountData() {
+
+void User::show() {
   // buffer size
   char buffer[128];
-  // file status
-  bool flag = true;
 
   // open file filePath see "user.h"
   ifstream file(filePath);
-  if (!file.is_open())
-    flag = false;
+  if (!file.is_open()) {
+    cerr << "File open error!." << endl;
+  }
   else {
     cout.flags(ios::left);
     cout << setw(20) << ("id") << setw(20) << ("passwd") << setw(20) << ("name") << setw(20) << ("tel") << endl;
@@ -28,8 +35,6 @@ bool loadAccountData() {
   }
   cout << endl;
   cout << ("---------------------------------------------------------------------------");
-  return flag;
 }
-
 
 #endif //LORNABK_FILE_H
