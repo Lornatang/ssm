@@ -5,6 +5,8 @@
 #include "user.h"
 #include "file.h"
 #include "util.h"
+using namespace std;
+
 int main(int argc, char const *argv[]) {
   User user;
   // load data from file

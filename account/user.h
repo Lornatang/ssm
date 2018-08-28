@@ -12,7 +12,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <string>
 #include <cstdlib>
 #include <iomanip>
@@ -51,6 +50,9 @@ class User {
   }
 
   void create();
+  void delete();
+  void search();
+  void modify();
 };
 
 #endif //LORNABK_USER_H
