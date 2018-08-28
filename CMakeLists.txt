@@ -8,5 +8,5 @@ add_library(account STATIC account/user.cc)
 add_executable(ssm account/user.h account/user.cc account/file.h account/util.h)
 
 install(TARGETS ssm RUNTIME DESTINATION bin)
-install(TARGETS account ARCHIVE DESTINATION lsm/lib)
+install(TARGETS account ARCHIVE DESTINATION ssm/lib)
 
