@@ -38,6 +38,7 @@ bool User::Create() {
   bool flag = true;
 
   system("clear");
+  ofstream touch(filePath);
 
   cout.flags(ios::adjustfield);
   cout << setw(45) << ("|______________|") << endl;
@@ -61,6 +62,7 @@ bool User::Create() {
 
   // if id don't exist run!
   if (flag) {
+
     ofstream ofs(filePath, ios::app);
     if (!ofs) {
       flag = false;
@@ -72,6 +74,7 @@ bool User::Create() {
     }
     ofs.close();
   }
+  touch.close();
   return flag;
 }
 
