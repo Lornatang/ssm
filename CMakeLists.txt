@@ -9,4 +9,5 @@ add_executable(ssm account/user.h account/user.cc account/file.h account/util.h)
 
 install(TARGETS ssm RUNTIME DESTINATION bin)
 install(TARGETS account ARCHIVE DESTINATION ssm/lib)
+install()
 

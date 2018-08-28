@@ -31,16 +31,6 @@ int main(int argc, char const *argv[]) {
              "InstalledDir: /Library/Developer/CommandLineTools/usr/bin\n");
     return 0;
   } else if ((strcmp(argv[1], "-c") == 0) || (strcmp(argv[1], "--create") == 0)) {
-    // verify account
-    if (user.Verify()) {
-      cout << ("Account verify complete.\n");
-      sleep(1);
-    } else {
-      cerr << ("Account verify error.\n");
-      cerr << ("Exit create account. If you create account, please restart app.\n");
-      return -1;
-    }
-
     if (user.Create()) {
       cout << ("Account create complete.\n");
       return 0;
