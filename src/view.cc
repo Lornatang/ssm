@@ -16,37 +16,35 @@ View::View() = default;
 View::~View() = default;
 
 /* 欢迎 */
-void View:: welcome() {
+void View::welcome() {
   system("clear");
-  std::cout<<"欢迎来到湖南涉外经济学院计算机应用1603班学生管理系统"<<std::endl;
+  cout << "欢迎来到湖南涉外经济学院计算机应用1603班学生管理系统" << endl;
 }
 
 /* 显示菜单 */
-void View:: showMenu() {
+void View::showMenu() {
 
-  std::cout<<"\n";
-  std::cout<<"操作步骤"<<std::endl;
+  cout << "\n";
+  cout << "操作步骤" << endl;
 
-  std::cout<<"1. 录入"<<std::endl;
-  std::cout<<"2. 修改"<<std::endl;
-  std::cout<<"3. 查找"<<std::endl;
-  std::cout<<"4. 删除"<<std::endl;
-  std::cout<<"5. 显示所有"<<std::endl;
-  std::cout<<"6. 保存至文件"<<std::endl;
-  std::cout<<"7. 从文件导入"<<std::endl;
-  std::cout<<"0. 退出"<<std::endl;
-  std::cout<<"\n";
-  std::cout<<"\n";
-  std::cout<<"请选择操作：";
+  cout << "1. 录入" << endl;
+  cout << "2. 修改" << endl;
+  cout << "3. 查找" << endl;
+  cout << "4. 删除" << endl;
+  cout << "5. 显示所有" << endl;
+  cout << "6. 保存至文件" << endl;
+  cout << "7. 从文件导入" << endl;
+  cout << "0. 退出" << endl;
+  cout << "\n";
+  cout << "\n";
+  cout << "请选择操作：";
 }
 
-
 /* View 显示所有学生 */
-void View::showAllStuAtView(const std::map<int, User> & stu_m1 )
-{
+void View::showAllStuAtView(const map<int, User> &stu_m1) {
 
   system("clear");
-  cout<<"id    |"<<"name  |"<<"age"<<std::endl;
+  cout << "id    |" << "name  |" << "age" << endl;
   User cStuMg;
   cStuMg.showAll(stu_m1);
 
@@ -57,60 +55,54 @@ void View::showAllStuAtView(const std::map<int, User> & stu_m1 )
 }
 
 /* view层 添加一个学生 */
-void  View:: addStuAtView( std::map<int, User> & stu_m1 )
-{
+void View::addStuAtView(map<int, User> &stu_m1) {
   User cStuMg;
 
   int id = 0;
-  std::string name;
+  string name;
   int age = 0;
   User cStu;
 
   system("clear");
 
-  std::cout<<"录入\n";
-  std::cout<<"id:";
-  std::cin>>id;
+  cout << "录入\n";
+  cout << "id:";
+  cin >> id;
 
-  std::cout<<"name:";
-  std::cin>>name;
+  cout << "name:";
+  cin >> name;
 
-  std::cout<<"age:";
-  std::cin>>age;
+  cout << "age:";
+  cin >> age;
 
   cStu.setId(id);
   cStu.setName(name);
   cStu.setPasswd(age);
 
   // 保存
-  cStuMg.addAStu(stu_m1,cStu);
+  cStuMg.addAStu(stu_m1, cStu);
 
   system("cls");
   welcome();
   showMenu();
 }
 
-
-
 /* View 查找一个学生 */
-void  View::  findStuAtView(const std::map<int, User> & m1) {
+void View::findStuAtView(const map<int, User> &m1) {
 
   system("clear");
   int id = 0;
-  std::cout<<"请输入要查找学生的id"<<std::endl;
-  std::cin>>id;
+  cout << "请输入要查找学生的id" << endl;
+  cin >> id;
 
   User cStuMg;
   User cStu;
-  cStu = cStuMg.findById(m1,id);
+  cStu = cStuMg.findById(m1, id);
 
-  if (cStu.getId()!=-1)
-  {
-    std::cout<<cStu<<std::endl;
-  }
-  else
-  {
-    std::cout<<"查无此人"<<std::endl;
+  if (cStu.getId() != -1) {
+    cout << cStu << endl;
+  } else {
+    cout << "查无此人" << endl;
   }
 
   getchar();
@@ -121,22 +113,20 @@ void  View::  findStuAtView(const std::map<int, User> & m1) {
 }
 
 /* view层删除一个学生 */
-void   View:: deleteByIdAtView(std::map<int, User> & v1) {
+void View::deleteByIdAtView(map<int, User> &v1) {
 
   system("clear");
   int id = 0;
-  std::cout<<"请输入要删除的学生的id"<<std::endl;
-  std::cin>>id;
+  cout << "请输入要删除的学生的id" << endl;
+  cin >> id;
 
   User cStuMg;
-  bool b = cStuMg.deleteStuById(v1,id);
+  bool b = cStuMg.deleteStuById(v1, id);
 
-  if (b)
-  {
-    std::cout<<"删除成功"<<std::endl;
-  }
-  else {
-    std::cout<<"查无此人"<<std::endl;
+  if (b) {
+    cout << "删除成功" << endl;
+  } else {
+    cout << "查无此人" << endl;
   }
 
   getchar();
@@ -147,21 +137,21 @@ void   View:: deleteByIdAtView(std::map<int, User> & v1) {
 }
 
 /* view层 更新一个学生 */
-void   View:: updateByIdAtView(std::map<int, User> & m1) {
+void View::updateByIdAtView(map<int, User> &m1) {
 
   system("cls");
 
-  std::cout<<"请输入要修改的学生的id"<<std::endl;
+  cout << "请输入要修改的学生的id" << endl;
   int id = 0;
-  std::cin>>id;
-  std::string name = " ";
+  cin >> id;
+  string name = " ";
 
-  std::cout<<"name:";
-  std::cin>>name;
+  cout << "name:";
+  cin >> name;
 
   int age = 0;
-  std::cout<<"age:";
-  std::cin>>age;
+  cout << "age:";
+  cin >> age;
 
   User cStu;
   cStu.setId(id);
@@ -170,16 +160,13 @@ void   View:: updateByIdAtView(std::map<int, User> & m1) {
 
   User cStuMg;
 
-  User cStu2 = cStuMg.updateStu(m1,cStu);
+  User cStu2 = cStuMg.updateStu(m1, cStu);
 
-  if (cStu2.getId()!=-1)
-  {
-    std::cout<<cStu2<<std::endl;
-    std::cout<<"修改成功"<<std::endl;
-  }
-  else
-  {
-    std::cout<<"查无此人"<<std::endl;
+  if (cStu2.getId() != -1) {
+    cout << cStu2 << endl;
+    cout << "修改成功" << endl;
+  } else {
+    cout << "查无此人" << endl;
   }
 
   system("pause");
@@ -190,22 +177,20 @@ void   View:: updateByIdAtView(std::map<int, User> & m1) {
 }
 
 /* view层 把vec保存进文件 */
-void   View:: saveToFileAtView(const std::map<int, User> & m1, std::string pathName) {
+void View::saveToFileAtView(const map<int, User> &m1, string pathName) {
 
-  if (m1.begin()==m1.end()) {
+  if (m1.begin() == m1.end()) {
     system("cls");
-    std::cout<<"还没有任何学生信息，无法保存"<<std::endl;
-  }
-  else {
+    cout << "还没有任何学生信息，无法保存" << endl;
+  } else {
     // 保存
     User cStuMg;
-    bool b = cStuMg.saveData(m1,pathName);
+    bool b = cStuMg.saveData(m1, pathName);
     if (b) {
       system("clear");
-      std::cout<<"保存成功"<<std::endl;
-    }
-    else  {
-      std::cout<<"保存失败"<<std::endl;
+      cout << "保存成功" << endl;
+    } else {
+      cout << "保存失败" << endl;
     }
   }
 
@@ -217,17 +202,16 @@ void   View:: saveToFileAtView(const std::map<int, User> & m1, std::string pathN
 }
 
 /* view层 把文件中的东西导入 vec */
-void  View::  readFromFileAtView(std::map<int, User> & m, std::string pathName) {
+void View::readFromFileAtView(map<int, User> &m, string pathName) {
 
   system("clear");
 
   User cStuMg;
-  bool b = cStuMg.loadData(m, std::move(pathName));
-  if (b){
-    std::cout<<"读取成功"<<std::endl;
-  }
-  else {
-    std::cout<<"读取失败"<<std::endl;
+  bool b = cStuMg.loadData(m, pathName);
+  if (b) {
+    cout << "读取成功" << endl;
+  } else {
+    cout << "读取失败" << endl;
   }
   getchar();
   system("clear");

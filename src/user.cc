@@ -106,7 +106,6 @@ User User::updateStu(map<int, User> &u, const User &cStu) {
   iter = u.find(id);
   if (iter != u.end()) {
     // 修改
-    iter->second = cStu;
     stu = cStu; // 把修改后的对象，赋值，再返回上层
   }
 

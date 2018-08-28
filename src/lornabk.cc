@@ -10,7 +10,7 @@
 #include <unistd.h>
 using namespace std;
 
-int main() {
+int main(int argc, char const *argv[]) {
 
   string pathName = "../data/stu.dat";
 
