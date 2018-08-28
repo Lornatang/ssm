@@ -3,5 +3,5 @@ project(lornabk)
 
 SET(CMAKE_CXX_STANDARD 17)
 
-add_executable(books account/create.h account/user.h account/user.cc)
+add_executable(books account/user.h account/user.cc account/file.h account/util.h)
 
