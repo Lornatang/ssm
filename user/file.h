@@ -8,8 +8,8 @@
  *            1.void show() show account data.
  * */
 
-#ifndef LORNABK_FILE_H
-#define LORNABK_FILE_H
+#ifndef SSM_USER_FILE_H
+#define SSM_USER_FILE_H
 
 #include "user.h"
 using namespace std;

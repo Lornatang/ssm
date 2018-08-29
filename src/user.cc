@@ -4,7 +4,6 @@
 //
 
 #include "../user/user.h"
-#include "../user/file.h"
 #include "../util/user.h"
 using namespace std;
 
@@ -156,10 +155,12 @@ int main(int argc, char const *argv[]) {
     cout << ("Return status 0.\n");
     return 0;
   } else {
-    cerr << argv[1] << (" is unknown command!\n");
+    if (argc > 1)
+      cerr << argv[1] << (" is unknown command!\n");
+    else {
     cerr << ("Please use '-h' or '--help' get help\n");
     cerr << ("Return status -1\n");
+      return -1;
+    }
   }
-
-  return 0;
 }

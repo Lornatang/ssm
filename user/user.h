@@ -6,8 +6,8 @@
 /**
  * Class User base*/
 
-#ifndef LORNABK_USER_H
-#define LORNABK_USER_H
+#ifndef SSM_USER_USER_H
+#define SSM_USER_USER_H
 
 // file save to "../data/*"
 #ifndef USER_DATA_FILE
@@ -89,9 +89,8 @@ class User {
   void userClassfy();
   bool userRead();        //read data from file
   bool userSave();        //save data to file
-  int isRead();
   bool quit();
   void disUserInfo();     // display all user info
 };
 
-#endif //LORNABK_USER_H
+#endif //SSM_USER_USER_H

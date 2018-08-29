@@ -3,8 +3,8 @@
  * Priority execution when importing.
  * Otherwise, there will be a major flaw in the program running.*/
 
-#ifndef SSM_BASE_H
-#define SSM_BASE_H
+#ifndef SSM_USER_BASE_H
+#define SSM_USER_BASE_H
 
 #include "user.h"
 

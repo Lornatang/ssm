@@ -9,8 +9,8 @@
  *            2.bool Verify()
  * */
 
-#ifndef LORNABK_UTIL_H
-#define LORNABK_UTIL_H
+#ifndef LORNABK_UTIL_USER_H
+#define LORNABK_UTIL_USER_H
 
 #include "../user/user.h"
 using namespace std;

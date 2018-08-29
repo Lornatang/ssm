@@ -2,8 +2,8 @@
 // Created by mac on 2018/8/29.
 //
 
-#ifndef SSM_METHODS_H
-#define SSM_METHODS_H
+#ifndef SSM_USER_METHODS_H
+#define SSM_USER_METHODS_H
 
 #include "user.h"
 #include "file.h"
