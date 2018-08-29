@@ -11,7 +11,12 @@
 
 // file save to "../data/*"
 #ifndef ACCOUNT_DATA_FILE
-#define filePath "../data/account.dat"
+#define filePath "/usr/local/ssm/data/account.dat"
+#endif
+
+// temp file use delete txt.
+#ifndef ACCOUNT_DATA_FILE
+#define tmpPath "/usr/local/ssm/data/tmp.dat"
 #endif
 
 #include <iostream>

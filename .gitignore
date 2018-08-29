@@ -64,4 +64,5 @@ cmake-build-debug/cmake_install.cmake
 cmake-build-debug/lornabk.cbp
 .idea
 /build/
-data
+
+/data/

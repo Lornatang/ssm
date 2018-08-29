@@ -3,8 +3,8 @@ project(ssm CXX)
 
 SET(CMAKE_CXX_STANDARD 17)
 
-add_library(account STATIC account/user.cc)
 
+add_library(account STATIC account/user.cc)
 
 add_executable(ssm account/user.h account/user.cc account/file.h account/util.h)
 

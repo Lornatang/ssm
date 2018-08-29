@@ -35,10 +35,9 @@ bool checkAccount(const string &id) {
 bool User::Create() {
   User user;
   // set flag status
-  bool flag = true;
+  bool flag = false;
 
   system("clear");
-  ofstream touch(filePath);
 
   cout.flags(ios::adjustfield);
   cout << setw(45) << ("|______________|") << endl;
@@ -48,9 +47,8 @@ bool User::Create() {
   cout << ("Id:");
   cin >> user.id;
   // if id exist. exit app;
-  if (!checkAccount(user.id)) {
-    flag = false;
-  }
+  if (!checkAccount(user.id))
+    return flag;
   else {
     cout << ("Password:");
     cin >> user.passwd;
@@ -58,24 +56,21 @@ bool User::Create() {
     cin >> user.name;
     cout << ("Telephone:");
     cin >> user.tel;
-  }
+    flag = true;
 
-  // if id don't exist run!
-  if (flag) {
-
+    // Write data to file.
     ofstream ofs(filePath, ios::app);
     if (!ofs) {
-      flag = false;
       cerr << "File open error." << endl;
-    }
-    else {
+      return flag;
+    } else {
       ofs.flags(ios::left);
       ofs << setw(20) << user.id << setw(20) << user.passwd << setw(20) << user.name << setw(20) << user.tel << endl;
     }
     ofs.close();
+
+    return flag;
   }
-  touch.close();
-  return flag;
 }
 
 bool User::Verify() {
@@ -94,5 +89,4 @@ bool User::Verify() {
 
   return flag;
 }
-
 #endif //

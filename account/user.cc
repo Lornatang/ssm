@@ -35,16 +35,16 @@ int main(int argc, char const *argv[]) {
       cout << ("Account create complete.\n");
       return 0;
     } else {
-      while (errCount < 2) {
+      while (errCount < 3) {
+        cerr << ("Id is exist! Please input other number.\n");
         cerr << ("\nWait 3s to pass...\n");
         sleep(3);
-        cerr << ("Id is exist! Please input other number.\n");
         user.Create();
         errCount += 1;
       }
-      cerr << ("Account create error.\n");
-      cerr << ("\nError count have 3. exit create account. If you create account, please restart app.\n");
-      return -1;
+        cerr << ("Account create error.\n");
+        cerr << ("\nError count have 3. exit create account. If you create account, please restart app.\n");
+        return -1;
     }
   } else if ((strcmp(argv[1], "-s") == 0) || (strcmp(argv[1], "--show") == 0)) {
     // verify account
