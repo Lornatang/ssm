@@ -8,98 +8,92 @@
 #include "user.h"
 #include "file.h"
 
-void SInfo::CreatSinfo()     //创建学生信息表
-{
+// Init user numbers
+void User::userInit() {
+  // users
   int n;
-  StuNode *p, *s;
-  p = StuListHead;
-  cout << "请输入学生人数：";
+  User *p, *u;
+  u = new User;
+  p = head;
+  cout << "Please input numbers: ";
   cin >> n;
-  for (int i = 1; i <= n; i++)
-  {
-    s = new StuNode;
-    cin >> s->num >> s->math>>s->eng>>s->yuwen;
-    s->sum = s->math + s->eng + s->yuwen;
-    s->nextstu = p->nextstu;
-    p->nextstu = s;
-    p = p->nextstu;
+  for (int i = 0; i < n; i++) {
+    cin >> u->id >> u->passwd >> u->name >> u->address >> u->tel;
+    u->next = p->next;
+    p->next = u;
+    p = p->next;
   }
-  if (p == NULL)   //判断学生信息表是否创建成功
+  if (p == nullptr)   //判断学生信息表是否创建成功
   {
-    cout << "创建失败请重新创建！" << endl;
-    CreatSinfo();
+    cout << "Init error. Please re-operate.\n";
+    userInit();
   }
 }
 
-void SInfo::ShowInfo()      //遍历输出
-{
-  StuNode *p;
-  cout << "学号" << '\t' << "数学" << '\t' << "英语" << '\t' << "语文" << '\t' << "总分" << endl;
-  for (p = StuListHead->nextstu; p != NULL; p = p->nextstu)
-  {
-    cout << p->num << '\t' << p->math << '\t' << p->eng << '\t' << p->yuwen << '\t' << p->sum << endl;
+// Print user info
+void User::disUserInfo() {
+  User *p;
+  cout.flags(ios::left);
+  cout << setw(20) << ("id") << setw(20) << ("password") << setw(20) << ("name") << setw(20) << ("address") << setw(20) << ("telephone\n");
+  for (p = head->next; p != nullptr; p = p->next) {
+    cout.flags(ios::left);
+    cout << setw(20) << p->id << setw(20) << p->passwd << setw(20) << p->name << setw(20) << p->address << setw(20) << p->tel << endl;
   }
 }
 
-void SInfo::StuInsert(int snum, int smath,int seng,int syuwen)     //插入学生信息（头插法）
-{
-  StuNode *s,*p;
-  s = new StuNode;
-  s->num = snum;
-  s->math = smath;
-  s->eng = seng;
-  s->yuwen = syuwen;
-  s->sum = s->math + s->eng + s->yuwen;
-  p = StuListHead;
-  s->nextstu = p->nextstu;
-  p->nextstu = s;
+// insert student information (head interpolation)
+void User::userInsert(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel) {
+  User *p, *u;
+  u = new User;
+  u->id = uid;
+  u->passwd = upasswd;
+  u->name = uname;
+  u->address = uaddress;
+  u->tel = utel;
+
+  p = head;
+  u->next = p->next;
+  p->next = u;
 }
 
-void SInfo::StuDelete(int snum)
-{
-  StuNode *p, *ptemp;
-  p = StuListHead;
-  ptemp = p;
-  while (p->nextstu && p->num!=snum)   //循环终止条件为p->nextstu不为空 而且没有找到相应学号的学生
-  {
-    ptemp = p;
-    p = p->nextstu;
+// Delete user info
+void User::userDelete(int uid) {
+  User *p, *tmp;
+  p = head;
+  tmp = p;
+  /*cycle termination condition is p->next is not empty
+   *and does not find the corresponding student number
+   */
+  while (p->next && p->id != uid) {
+    tmp = p;
+    p = p->next;
   }
-  if (p->num == snum)
-  {
-    ptemp->nextstu = p->nextstu;
+  if (p->id == uid) {
+    tmp->next = p->next;
     delete p;
-  }
-  else
-  {
-    cout << "未找到该学生信息！" << endl;
-  }
+  } else
+    cerr << "Can't find this user info.\n";
 }
 
-StuNode *SInfo::StuFind(int snum)
-{
-  StuNode *p;
-  p = StuListHead->nextstu;
-  while (p->nextstu && p->num != snum)   //循环终止条件为p->nextstu不为空 而且没有找到相应学号的学生
-  {
-    p = p->nextstu;
-  }
-  if (p->num == snum)
-  {
+User *User::userFind(int uid) {
+  User *p;
+  p = head->next;
+  /*the termination condition is p->next is not empty
+   * and the corresponding student number is not found
+   */
+  while (p->next && p->id != uid)
+    p = p->next;
+  if (p->id == uid)
     return p;
-  }
-  else
-  {
+  else {
     cout << "未找到该学生信息！" << endl;
     return NULL;
   }
 }
 
-void SInfo::StuModify(int snum, int smath, int seng, int syuwen)
-{
-  StuNode *ItemStu = StuFind(snum);   //直接调用查找函数
-  if (ItemStu != NULL)
-  {
+void User::StuModify(int snum, int smath, int seng, int syuwen) {
+  User *ItemStu = StuFind(snum);   //直接调用查找函数
+  if (ItemStu != NULL) {
     ItemStu->math = smath;
     ItemStu->num = snum;
     ItemStu->math = smath;
@@ -109,116 +103,83 @@ void SInfo::StuModify(int snum, int smath, int seng, int syuwen)
   }
 }
 
-void SInfo::StuCopy(StuNode *ptemp, StuNode *p)  //拷贝学生信息(将p的信息拷贝到ptemp中)
+void User::StuCopy(User *tmp, User *p)  //拷贝学生信息(将p的信息拷贝到ptemp中)
 {
-  if (p == NULL)
-  {
+  if (p == NULL) {
     cout << "拷贝目标为空！" << endl;
-  }
-  else
-  {
-    ptemp->num = p->num;
-    ptemp->math = p->math;
-    ptemp->eng = p->eng;
-    ptemp->yuwen = p->yuwen;
-    ptemp->sum = p->sum;
-    //ptemp->nextstu = p->nextstu;   //只是信息拷贝,next不能拷贝否则信息丢失
+  } else {
+    tmp->num = p->num;
+    tmp->math = p->math;
+    tmp->eng = p->eng;
+    tmp->yuwen = p->yuwen;
+    tmp->sum = p->sum;
+    //tmp->next = p->next;   //只是信息拷贝,next不能拷贝否则信息丢失
   }
 }
 
-void SInfo::StuSort(char ch)   //根据 总分排序
+void User::StuSort(char ch)   //根据 总分排序
 {
-  if (ch == '>')
-  {
-    for (StuNode *p = StuListHead->nextstu; p != NULL; p = p->nextstu)
-    {
-      for (StuNode *q = StuListHead->nextstu; q != NULL; q = q->nextstu)
-      {
-        if (p->sum > q->sum)
-        {
-          StuNode *ptemp = new StuNode;
-          StuCopy(ptemp, p);
+  if (ch == '>') {
+    for (User *p = head->next; p != NULL; p = p->next) {
+      for (User *q = head->next; q != NULL; q = q->next) {
+        if (p->sum > q->sum) {
+          User *tmp = new User;
+          StuCopy(tmp, p);
           StuCopy(p, q);
-          StuCopy(q, ptemp);
+          StuCopy(q, tmp);
         }
       }
     }
-  }
-  else if (ch == '<')
-  {
-    for (StuNode *p = StuListHead->nextstu; p != NULL; p = p->nextstu)
-    {
-      for (StuNode *q = StuListHead->nextstu; q != NULL; q = q->nextstu)
-      {
-        if (p->sum < q->sum)
-        {
-          StuNode *ptemp = new StuNode;
-          StuCopy(ptemp, p);
+  } else if (ch == '<') {
+    for (User *p = head->next; p != NULL; p = p->next) {
+      for (User *q = head->next; q != NULL; q = q->next) {
+        if (p->sum < q->sum) {
+          User *tmp = new User;
+          StuCopy(tmp, p);
           StuCopy(p, q);
-          StuCopy(q, ptemp);
+          StuCopy(q, tmp);
         }
       }
     }
-  }
-  else if (ch == 'o')
-  {
-    for (StuNode *p = StuListHead->nextstu; p != NULL; p = p->nextstu)
-    {
-      for (StuNode *q = StuListHead->nextstu; q != NULL; q = q->nextstu)
-      {
-        if (p->num < q->num)
-        {
-          StuNode *ptemp = new StuNode;
-          StuCopy(ptemp, p);
+  } else if (ch == 'o') {
+    for (User *p = head->next; p != NULL; p = p->next) {
+      for (User *q = head->next; q != NULL; q = q->next) {
+        if (p->num < q->num) {
+          User *tmp = new User;
+          StuCopy(tmp, p);
           StuCopy(p, q);
-          StuCopy(q, ptemp);
+          StuCopy(q, tmp);
         }
       }
     }
-  }
-  else
-  {
+  } else {
     cout << "排序条件出错！" << endl;
   }
 }
 
-void SInfo::StuClassfy()  //根据学生总分分类
+void User::StuClassfy()  //根据学生总分分类
 {
   int grade[5] = {0};
-  StuNode *p = StuListHead->nextstu;
-  while (p != NULL)
-  {
-    if (89 < p->math)
-    {
+  User *p = head->next;
+  while (p != NULL) {
+    if (89 < p->math) {
       grade[0]++;
-    }
-    else if (79 < p->math && p->math < 90)
-    {
+    } else if (79 < p->math && p->math < 90) {
       grade[1]++;
-    }
-    else if (69 < p->math && p->math < 80)
-    {
+    } else if (69 < p->math && p->math < 80) {
       grade[2]++;
-    }
-    else if (59 < p->math && p->math < 70)
-    {
+    } else if (59 < p->math && p->math < 70) {
       grade[3]++;
-    }
-    else
-    {
+    } else {
       grade[4]++;
     }
-    p = p->nextstu;
+    p = p->next;
   }
   cout << "A" << '\t' << "B" << '\t' << "C" << '\t' << "D" << '\t' << "E" << endl;
-  for (int i = 0; i < 5; i++)
-  {
+  for (int i = 0; i < 5; i++) {
     cout << grade[i] << '\t';
   }
   cout << endl;
 }
-
-
-
 
 #endif //SSM_METHODS_H

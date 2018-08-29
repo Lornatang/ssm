@@ -79,18 +79,18 @@ class User {
   User *next;
   User *head;
 
-  void userCreate();  // create user info
-  void userInsert(int uid, const string &upasswd, const string &uname, const string &address, int utel);  // insert user info to file
+  void userInit();  // create user info
+  void userInsert(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel);  // insert user info to file
   void userDelete(int uid);    // delete user info
   User *userFind(int uid);   // find user info by user id
-  void userModify(int uid, const string &upasswd, const string &uname, const string &address, int utel));   // modify user info
+  void userModify(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel));   // modify user info
   void userCopy(User *ptemp, User *p);  // copy user info
   void userSort(char ch);
   void userClassfy();
   bool userRead();        //read data from file
   bool userSave();        //save data to file
   int isRead();
-  void quit();
+  bool quit();
   void disUserInfo();     // display all user info
 };
 

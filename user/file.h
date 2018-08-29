@@ -55,4 +55,20 @@ bool User::userSave() {
   return flag;
 }
 
+bool User::quit() {
+  User user;
+
+  flag = user.userSave();
+  if (!flag) {
+    cerr << ("Data save is error.\n");
+    cerr << ("Return status -1\n");
+    return flag;
+  } else {
+    cout << ("Data saved! Exit system!\n");
+    cout << ("Return status 0.\n");
+    flag = true;
+    return flag;
+  }
+}
+
 #endif //LORNABK_FILE_H
