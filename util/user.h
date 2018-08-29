@@ -73,7 +73,6 @@ void userMenu()
   cout << setw(60) << ("|5.Modify user info                   10.Load user info   |\n");
   cout << setw(60) << ("|                    0.Exit system                        |\n");
   cout << setw(60) << ("|---------------------------------------------------------|\n");
-  cout << "\nPlease input your choice: ";
 }
 
 

@@ -36,7 +36,7 @@ bool flag = false;
 using namespace std;
 
 class User {
- private:
+ public:
   int id;
   string passwd;
   string name;
@@ -83,7 +83,7 @@ class User {
   void userInsert(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel);  // insert user info to file
   void userDelete(int uid);    // delete user info
   User *userFind(int uid);   // find user info by user id
-  void userModify(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel));   // modify user info
+  void userModify(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel);   // modify user info
   void userCopy(User *ptemp, User *p);  // copy user info
   void userSort(char ch);
   void userClassfy();
