@@ -7,6 +7,7 @@
 
 #include "user.h"
 #include "file.h"
+#include "base.h"
 
 // Init user numbers
 void User::userInit() {
@@ -169,8 +170,10 @@ void User::userClassfy() {
     }
       p = p->next;
     }
+    cout.flags(ios::left);
     cout << setw(20) << ("1601") << setw(20) << ("1602") << setw(20) << ("1603\n");
     for (int i: address) {
+      cout.flags(ios::left);
       cout << setw(20) << address[i];
     }
     cout << endl;
