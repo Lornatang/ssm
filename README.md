@@ -38,7 +38,7 @@ cmake .. or ccmake ..
 ```text
 make && sudo make install
 ```
-*open terminal run **ssm -h** or **ssm --help**
+*open terminal run **ssm -h** or **ssm --help***
 ## Donate
 
 - If you find this program helpful or inspiring. Please star **[ssm](https://github.com/Lornatang/ssm)**.
