@@ -4,10 +4,10 @@ project(ssm CXX)
 SET(CMAKE_CXX_STANDARD 17)
 
 
-add_library(account STATIC account/user.cc)
+add_library(user STATIC user/user.cc)
 
-add_executable(ssm account/user.h account/user.cc account/file.h account/util.h)
+add_executable(ssm user/user.h user/user.cc user/file.h util/user.h user/base.h user/methods.h)
 
 install(TARGETS ssm RUNTIME DESTINATION bin)
-install(TARGETS account ARCHIVE DESTINATION ssm/lib)
+install(TARGETS user ARCHIVE DESTINATION ssm/lib)
 

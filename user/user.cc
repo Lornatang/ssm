@@ -5,7 +5,7 @@
 
 #include "user.h"
 #include "file.h"
-#include "util.h"
+#include "../util/user.h"
 using namespace std;
 
 int errCount = 0;
@@ -21,8 +21,8 @@ int main(int argc, char const *argv[]) {
     cout << ("Usage:\n");
     cout << ("-h or --help    \t --get exec help.             \n");
     cout << ("-v or --version \t --get app version.           \n");
-    cout << ("-c or --create  \t --create account.            \n");
-    cout << ("-s or --show    \t --print account information. \n");
+    cout << ("-c or --create  \t --create user.            \n");
+    cout << ("-s or --show    \t --print user information. \n");
     return 0;
 
   } else if ((strcmp(argv[1], "-v") == 0) || (strcmp(argv[1], "--version") == 0)) {
@@ -43,11 +43,11 @@ int main(int argc, char const *argv[]) {
         errCount += 1;
       }
         cerr << ("Account create error.\n");
-        cerr << ("\nError count have 3. exit create account. If you create account, please restart app.\n");
+        cerr << ("\nError count have 3. exit create user. If you create user, please restart app.\n");
         return -1;
     }
   } else if ((strcmp(argv[1], "-s") == 0) || (strcmp(argv[1], "--show") == 0)) {
-    // verify account
+    // verify user
     if (user.Verify()) {
       cout << ("Account verify complete.\n");
       cout << ("Searching data...\n");
@@ -56,7 +56,7 @@ int main(int argc, char const *argv[]) {
       return 0;
     } else {
       cerr << ("Account verify error.\n");
-      cerr << ("Exit create account. If you create account, please restart app.\n");
+      cerr << ("Exit create user. If you create user, please restart app.\n");
       return -1;
     }
   } else {
