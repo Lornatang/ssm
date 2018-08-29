@@ -87,7 +87,7 @@ class User {
   void userCopy(User *ptemp, User *p);  // copy user info
   void userSort(char ch);
   void userClassfy();
-  void userRead();        //read data from file
+  bool userRead();        //read data from file
   bool userSave();        //save data to file
   int isRead();
   void quit();

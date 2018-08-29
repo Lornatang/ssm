@@ -15,19 +15,21 @@
 using namespace std;
 
 //从文件读入数据
-void User::userRead() {
-  User *p;
-  p = head;
-  ifstream in("StudentList.txt");
+bool User::userRead() {
+  User user;
+  ifstream in(userDataFile);
   if (!in) {
-    cout << ("没有学生信息，请先录入学生信息!\n");
-    return;
+    cerr << ("Can't open user data file!.\n");
+    cerr << ("Return status -1.\n");
+    flag = false;
+    return flag;
   }
   while (!in.eof()) {
-    int num, math, eng, yuwen, sum;
-    in >> num >> math >> eng >> yuwen >> sum;
-    StuInsert(num, math, eng, yuwen);
+    in >> user.id >> user.passwd >> user.name >> user.address >> user.tel;
+    userInsert(user.id, user.passwd, user.name, user.address, user.tel);
+    flag = true;
   }
+  return flag;
 }
 
 //保存学生信息
@@ -36,14 +38,17 @@ bool User::userSave() {
   p = head->next;
   ofstream out(userDataFile);
   if (!out) {
-    cout << ("Can't open user data file!.\n");
-    cerr << ("Return status -1.");
+    cerr << ("Can't open user data file!.\n");
+    cerr << ("Return status -1.\n");
     flag = false;
     return flag;
   }
   while (p != nullptr) {
-    out << setw(20) << p->id << setw(20) << p->name << setw(20) << p->passwd << setw(20) << p->address << setw(20)
-        << p->tel << "\n";
+    out << setw(20) << p->id;
+    out << setw(20) << p->name;
+    out << setw(20) << p->passwd;
+    out << setw(20) << p->address;
+    out << setw(20) << p->tel << "\n";
     p = p->next;
     flag = true;
   }
