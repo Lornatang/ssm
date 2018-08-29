@@ -66,3 +66,5 @@ cmake-build-debug/lornabk.cbp
 /build/
 
 /data/
+/.vscode/
+.vscode/

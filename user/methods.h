@@ -25,7 +25,8 @@ void User::userInit() {
   }
   if (p == nullptr)   //判断学生信息表是否创建成功
   {
-    cout << "Init error. Please re-operate.\n";
+    cerr << ("Init error. Please re-operate.\n");
+    cerr << ("Return status -1.\n");
     userInit();
   }
 }
@@ -34,10 +35,12 @@ void User::userInit() {
 void User::disUserInfo() {
   User *p;
   cout.flags(ios::left);
-  cout << setw(20) << ("id") << setw(20) << ("password") << setw(20) << ("name") << setw(20) << ("address") << setw(20) << ("telephone\n");
+  cout << setw(20) << ("id") << setw(20) << ("password") << setw(20) << ("name") << setw(20) << ("address") << setw(20)
+       << ("telephone\n");
   for (p = head->next; p != nullptr; p = p->next) {
     cout.flags(ios::left);
-    cout << setw(20) << p->id << setw(20) << p->passwd << setw(20) << p->name << setw(20) << p->address << setw(20) << p->tel << endl;
+    cout << setw(20) << p->id << setw(20) << p->passwd << setw(20) << p->name << setw(20) << p->address << setw(20)
+         << p->tel << endl;
   }
 }
 
@@ -71,10 +74,13 @@ void User::userDelete(int uid) {
   if (p->id == uid) {
     tmp->next = p->next;
     delete p;
-  } else
-    cerr << "Can't find this user info.\n";
+  } else {
+    cerr << ("Can't find id [") << uid << ("] information!\n");
+    cerr << ("Return status -1.\n");
+  }
 }
 
+// Find user info by id
 User *User::userFind(int uid) {
   User *p;
   p = head->next;
@@ -86,100 +92,88 @@ User *User::userFind(int uid) {
   if (p->id == uid)
     return p;
   else {
-    cout << "未找到该学生信息！" << endl;
-    return NULL;
+    cerr << ("Can't find id [") << uid << ("] information!\n");
+    cerr << ("Return status -1.\n");
+    return nullptr;
   }
 }
 
-void User::StuModify(int snum, int smath, int seng, int syuwen) {
-  User *ItemStu = StuFind(snum);   //直接调用查找函数
-  if (ItemStu != NULL) {
-    ItemStu->math = smath;
-    ItemStu->num = snum;
-    ItemStu->math = smath;
-    ItemStu->eng = seng;
-    ItemStu->yuwen = syuwen;
-    ItemStu->sum = ItemStu->math + ItemStu->eng + ItemStu->yuwen;
+// Modify student information (copy p information to tmp)
+void User::userModify(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel) {
+  // Call the find function.
+  User *userItem = userFind(uid);
+  if (userItem != nullptr) {
+    userItem->id = uid;
+    userItem->passwd = upasswd;
+    userItem->name = uname;
+    userItem->address = uaddress;
+    userItem->tel = utel;
   }
 }
 
-void User::StuCopy(User *tmp, User *p)  //拷贝学生信息(将p的信息拷贝到ptemp中)
-{
-  if (p == NULL) {
-    cout << "拷贝目标为空！" << endl;
+// Copy student information (copy the information of p into tmp)
+void User::userCopy(User *p, User *tmp) {
+  if (p == nullptr) {
+    cerr << ("Copy information cannot be empty.\n") << endl;
+    cerr << ("Return status -1.\n");
   } else {
-    tmp->num = p->num;
-    tmp->math = p->math;
-    tmp->eng = p->eng;
-    tmp->yuwen = p->yuwen;
-    tmp->sum = p->sum;
-    //tmp->next = p->next;   //只是信息拷贝,next不能拷贝否则信息丢失
+    tmp->id = p->id;
+    tmp->passwd = p->passwd;
+    tmp->name = p->name;
+    tmp->address = p->address;
+    tmp->tel = p->tel;
   }
 }
 
-void User::StuSort(char ch)   //根据 总分排序
-{
+// Sort by user id
+void User::userSort(char ch) {
   if (ch == '>') {
-    for (User *p = head->next; p != NULL; p = p->next) {
-      for (User *q = head->next; q != NULL; q = q->next) {
-        if (p->sum > q->sum) {
+    for (User *p = head->next; p != nullptr; p = p->next) {
+      for (User *q = head->next; q != nullptr; q = q->next) {
+        if (p->id > q->id) {
           User *tmp = new User;
-          StuCopy(tmp, p);
-          StuCopy(p, q);
-          StuCopy(q, tmp);
+          userCopy(tmp, p);
+          userCopy(p, q);
+          userCopy(q, tmp);
         }
       }
     }
   } else if (ch == '<') {
-    for (User *p = head->next; p != NULL; p = p->next) {
-      for (User *q = head->next; q != NULL; q = q->next) {
-        if (p->sum < q->sum) {
+    for (User *p = head->next; p != nullptr; p = p->next) {
+      for (User *q = head->next; q != nullptr; q = q->next) {
+        if (p->id < q->id) {
           User *tmp = new User;
-          StuCopy(tmp, p);
-          StuCopy(p, q);
-          StuCopy(q, tmp);
-        }
-      }
-    }
-  } else if (ch == 'o') {
-    for (User *p = head->next; p != NULL; p = p->next) {
-      for (User *q = head->next; q != NULL; q = q->next) {
-        if (p->num < q->num) {
-          User *tmp = new User;
-          StuCopy(tmp, p);
-          StuCopy(p, q);
-          StuCopy(q, tmp);
+          userCopy(tmp, p);
+          userCopy(p, q);
+          userCopy(q, tmp);
         }
       }
     }
   } else {
-    cout << "排序条件出错！" << endl;
+    cerr << ("Operator error!\n");
+    cerr << ("Return status -1.\n");
   }
 }
 
-void User::StuClassfy()  //根据学生总分分类
-{
-  int grade[5] = {0};
+// Classify by user address
+void User::userClassfy() {
+  int address[3] = {0};
   User *p = head->next;
-  while (p != NULL) {
-    if (89 < p->math) {
-      grade[0]++;
-    } else if (79 < p->math && p->math < 90) {
-      grade[1]++;
-    } else if (69 < p->math && p->math < 80) {
-      grade[2]++;
-    } else if (59 < p->math && p->math < 70) {
-      grade[3]++;
-    } else {
-      grade[4]++;
+  while (p != nullptr) {
+    if ("1601" == p->address) {
+      address[0] += 1;
+    } else if ("1602" == p->address) {
+      address[1] += 1;
+    } else if ("1603" == p->address) {
+      address[2] += 1;
     }
-    p = p->next;
+      p = p->next;
+    }
+    cout << setw(20) << ("1601") << setw(20) << ("1602") << setw(20) << ("1603\n");
+    for (int i: address) {
+      cout << setw(20) << address[i];
+    }
+    cout << endl;
   }
-  cout << "A" << '\t' << "B" << '\t' << "C" << '\t' << "D" << '\t' << "E" << endl;
-  for (int i = 0; i < 5; i++) {
-    cout << grade[i] << '\t';
-  }
-  cout << endl;
-}
 
 #endif //SSM_METHODS_H
