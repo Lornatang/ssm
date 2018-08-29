@@ -3,8 +3,8 @@
 // Handler interface
 //
 
-#include "user.h"
-#include "file.h"
+#include "../user/user.h"
+#include "../user/file.h"
 #include "../util/user.h"
 using namespace std;
 
