@@ -14,11 +14,17 @@ void User::userInit() {
   int n;
   userNode *p, *u;
   p = head;
-  u = new userNode;
+
   cout << "Please input numbers: ";
   cin >> n;
   for (int i = 0; i < n; i++) {
-    cin >> u->id >> u->passwd >> u->name >> u->address >> u->tel;
+    u = new userNode;
+    cout << ("id: "); cin >> u->id;
+    cout << ("password: "); cin >> u->passwd;
+    cout << ("name: "); cin >> u->name;
+    cout << ("address: "); cin >> u->address;
+    cout << ("tel: "); cin >> u->tel;
+
     u->next = p->next;
     p->next = u;
     p = p->next;
@@ -93,7 +99,6 @@ userNode *User::userFind(int uid) {
     return p;
   else {
     cerr << ("Can't find id [") << uid << ("] information!\n");
-    cerr << ("Return status -1.\n");
     return nullptr;
   }
 }
@@ -115,7 +120,7 @@ void User::userModify(int uid, const string &upasswd, const string &uname, const
 void User::userCopy(userNode *p, userNode *tmp) {
   if (p == nullptr) {
     cerr << ("Copy information cannot be empty.\n") << endl;
-    cerr << ("Return status -1.\n");
+    return;
   } else {
     tmp->id = p->id;
     tmp->passwd = p->passwd;

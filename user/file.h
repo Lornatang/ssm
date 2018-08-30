@@ -17,9 +17,9 @@ using namespace std;
 
 //从文件读入数据
 bool User::userRead() {
-  ifstream in("StudentList.txt");
+  ifstream in(userDataFile);
   if (!in) {
-    cout << "没有学生信息，请先录入学生信息!" << endl;
+    cout << "None user info!" << endl;
     return flag;
   }
   while (!in.eof()) {
@@ -36,15 +36,13 @@ bool User::userRead() {
 }
 
 //保存学生信息
-bool User::userSave() {
+void User::userSave() {
   userNode *p;
   p = head->next;
   ofstream out(userDataFile);
   if (!out) {
     cerr << ("Can't open user data file!.\n");
-    cerr << ("Return status -1.\n");
-    flag = false;
-    return flag;
+    return ;
   }
   while (p != nullptr) {
     out << setw(20) << p->id;
@@ -53,23 +51,21 @@ bool User::userSave() {
     out << setw(20) << p->address;
     out << setw(20) << p->tel << "\n";
     p = p->next;
-    flag = true;
   }
-  return flag;
 }
 
-bool User::quit() {
-  flag = userSave();
-  if (!flag) {
-    cerr << ("Data save is error.\n");
-    cerr << ("Return status -1\n");
-    return flag;
-  } else {
-    cout << ("Data saved! Exit system!\n");
-    cout << ("Return status 0.\n");
-    flag = true;
-    return flag;
-  }
-}
+//bool User::quit() {
+//  flag = userSave();
+//  if (!flag) {
+//    cerr << ("Data save is error.\n");
+//    cerr << ("Return status -1\n");
+//    return flag;
+//  } else {
+//    cout << ("Data saved! Exit system!\n");
+//    cout << ("Return status 0.\n");
+//    flag = true;
+//    return flag;
+//  }
+//}
 
 #endif //LORNABK_FILE_H

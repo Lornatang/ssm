@@ -11,17 +11,12 @@
 
 // file save to "../data/*"
 #ifndef USER_DATA_FILE
-#define userDataFile "/usr/local/ssm/data/account.ssm"
+#define userDataFile "/usr/local/ssm/data/user.ssm"
 #endif
 
 // temp file use delete txt.
 #ifndef ACCOUNT_TEMP_FILE
-#define userDataTempFile "/usr/local/ssm/data/tmp.ssm"
-#endif
-
-// define max numbers
-#ifndef DATA_MAX_NUM
-#define MAX_NUM 10
+#define userDataTempFile "/usr/local/ssm/data/userTmp.ssm"
 #endif
 
 // set flag status
@@ -67,7 +62,7 @@ class User {
   void userSort(char ch);
   void userClassfy();
   bool userRead();        //read data from file
-  bool userSave();        //save data to file
+  void userSave();        //save data to file
   bool quit();
   void disUserInfo();     // display all user info
 };
