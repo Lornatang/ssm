@@ -17,9 +17,8 @@
 #include <unistd.h>
 using namespace std;
 
-
 bool systemEnder() {
-  bool flag = false;
+  bool flag;
 
   system("clear");
 
@@ -48,8 +47,7 @@ bool systemEnder() {
         cerr << "User/Passwd valida error. And you can verify it " << errCount << " times\n";
         cerr << "Waiting 3s...\n";
         sleep(3);
-      }
-      else {
+      } else {
         cerr << "If the number of validation is exceeded, the system returns state -1.\n";
         cerr << "If you need to re-login, please re-run this App!\n";
         flag = false;
@@ -64,8 +62,7 @@ bool systemEnder() {
   }
 }
 
-void userMenu()
-{
+void userMenu() {
   cout.flags(ios::adjustfield);
   cout << setw(70) << ("|-----------------+++++++++++++++++++++--------------------|\n");
   cout << setw(70) << ("|                 |Super Smart Manager|                    |\n");
@@ -79,6 +76,5 @@ void userMenu()
   cout << setw(70) << ("|                    |Exit system|                         |\n");
   cout << setw(70) << ("|--------------------+++++++++++++-------------------------|\n");
 }
-
 
 #endif //

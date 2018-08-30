@@ -41,9 +41,9 @@ int main(int argc, char const *argv[]) {
     cout << ("-d or --delete               \t --Delete user information.              \n");
     cout << ("-s or --show                 \t --Search user information.              \n");
     cout << ("-m or --modify               \t --Modify user information.              \n");
-    cout << ("-e -s or --extend --sort     \t --extend function (sort by user id).    \n");
-    cout << ("-e -c or --extend --classify \t --extend function (classify by user id).\n");
-    cout << ("-e -d or --extend --display  \t --extend function (display by user id). \n");
+    cout << ("-e -s                        \t --extend function (sort by user id).    \n");
+    cout << ("-e -c                        \t --extend function (classify by user id).\n");
+    cout << ("-e -d                        \t --extend function (display by user id). \n");
     return 0;
   } else if ((strcmp(argv[1], "-v") == 0) || (strcmp(argv[1], "--version") == 0)) {
     cout << ("Book store version 0.0.4-beta.1\n");
@@ -76,13 +76,15 @@ int main(int argc, char const *argv[]) {
       if (choice == 'y') {
         user.userInsert(uid, upasswd, uname, uaddress, utel);
         cout << ("Insert user id [") << uid << ("] info complete!\n");
+        user.userSave();
         return 0;
-      } else if (choice == 'n') {
+      } else if (choice == 'N') {
         cerr << ("User operator cancel.\n");
         return -1;
       } else {
         user.userModify(uid, upasswd, uname, uaddress, utel);
         cout << ("Insert user id [") << uid << ("] info complete!\n");
+        user.userSave();
         return 0;
       }
     }
@@ -105,13 +107,15 @@ int main(int argc, char const *argv[]) {
       if (choice == 'y') {
         user.userDelete(uid);
         cout << ("Delete user id [") << uid << ("] info complete!\n");
+        user.userSave();
         return 0;
-      } else if (choice == 'n') {
+      } else if (choice == 'N') {
         cerr << ("User operator cancel.\n");
         return -1;
       } else {
         user.userModify(uid, upasswd, uname, uaddress, utel);
         cout << ("Insert user id [") << uid << ("] info complete!\n");
+        user.userSave();
         return 0;
       }
     }
@@ -161,18 +165,34 @@ int main(int argc, char const *argv[]) {
       if (choice == 'y') {
         user.userModify(uid, upasswd, uname, uaddress, utel);
         cout << ("Insert user id [") << uid << ("] info complete!\n");
+        user.userSave();
         return 0;
-      } else if (choice == 'n') {
+      } else if (choice == 'N') {
         cerr << ("User operator cancel.\n");
         return -1;
       } else {
         user.userModify(uid, upasswd, uname, uaddress, utel);
         cout << ("Insert user id [") << uid << ("] info complete!\n");
+        user.userSave();
         return 0;
       }
     }
     cout << ("Updating user info...\n");
     return 0;
+  } else if ((strcmp(argv[1], "-e") == 0) || (strcmp(argv[2], "--s") == 0)) {
+    cout << "Ascending Order or Descending Order (a/d/N): ";
+    cin >> choice;
+    if (choice == 'a')
+      user.userSort('<');
+    else if (choice == 'd')
+      user.userSort('>');
+    else if (choice == 'N') {
+      cerr << ("User operator cancel.\n");
+      return -1;
+    } else
+      user.userSort('>');
+    return 0;
+
   } else {
     if (argc > 1) {
       cerr.flags(ios::adjustfield);
