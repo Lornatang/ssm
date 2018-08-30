@@ -47,7 +47,7 @@ int main(int argc, char const *argv[]) {
     cout << ("-e -d                        \t --extend function (display by user id). \n");
     return 0;
   } else if ((strcmp(argv[1], "-v") == 0) || (strcmp(argv[1], "--version") == 0)) {
-    cout << ("Book store version 0.0.5-beta.1\n");
+    cout << ("Book store version 0.1.0-beta.1\n");
     cout << ("Thread model: posix\n");
     cout << ("InstalledDir: /Library/Developer/CommandLineTools/usr/bin\n");
     return 0;
