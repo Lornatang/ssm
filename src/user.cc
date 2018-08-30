@@ -28,10 +28,6 @@ int main(int argc, char const *argv[]) {
   if (argc < 2) {
     cerr << ("Please use '-h' or '--help' get help.\n");
     return -1;
-  }
-  if (!systemEnder()) {
-    cerr << ("System ender error.\n");
-    return -1;
   } else if ((strcmp(argv[1], "-g") == 0) || (strcmp(argv[1], "--gui") == 0)) {
     userMenu();
     return 0;
@@ -55,6 +51,10 @@ int main(int argc, char const *argv[]) {
     cout << ("InstalledDir: /Library/Developer/CommandLineTools/usr/bin\n");
     return 0;
   } else if ((strcmp(argv[1], "-c") == 0) || (strcmp(argv[1], "--create") == 0)) {
+    if (!systemEnder()) {
+      cerr << ("System ender error.\n");
+      return -1;
+    }
     cout.flags(ios::adjustfield);
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << setw(45) << ("|Insert user information|\n");
@@ -81,14 +81,18 @@ int main(int argc, char const *argv[]) {
         cerr << ("User operator cancel.\n");
         return -1;
       } else {
-        cerr << ("User operator error.\n");
-        return -1;
+        user.userModify(uid, upasswd, uname, uaddress, utel);
+        cout << ("Insert user id [") << uid << ("] info complete!\n");
+        return 0;
       }
     }
     cout << ("Updating user info...\n");
     return 0;
   } else if ((strcmp(argv[1], "-d") == 0) || (strcmp(argv[1], "--delete") == 0)) {
-
+    if (!systemEnder()) {
+      cerr << ("System ender error.\n");
+      return -1;
+    }
     cout.flags(ios::adjustfield);
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << setw(45) << ("|Delete user information|\n");
@@ -106,13 +110,18 @@ int main(int argc, char const *argv[]) {
         cerr << ("User operator cancel.\n");
         return -1;
       } else {
-        cerr << ("User operator error.\n");
-        return -1;
+        user.userModify(uid, upasswd, uname, uaddress, utel);
+        cout << ("Insert user id [") << uid << ("] info complete!\n");
+        return 0;
       }
     }
     cout << ("Updating user info...\n");
     return 0;
   } else if ((strcmp(argv[1], "-s") == 0) || (strcmp(argv[1], "--show") == 0)) {
+    if (!systemEnder()) {
+      cerr << ("System ender error.\n");
+      return -1;
+    }
     cout.flags(ios::adjustfield);
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << setw(45) << ("|Search user information|\n");
@@ -127,6 +136,10 @@ int main(int argc, char const *argv[]) {
          << u->tel;
     return 0;
   } else if ((strcmp(argv[1], "-m") == 0) || (strcmp(argv[1], "--modify") == 0)) {
+    if (!systemEnder()) {
+      cerr << ("System ender error.\n");
+      return -1;
+    }
     cout.flags(ios::adjustfield);
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << setw(45) << ("|Modify user information|\n");
@@ -153,16 +166,18 @@ int main(int argc, char const *argv[]) {
         cerr << ("User operator cancel.\n");
         return -1;
       } else {
-        cerr << ("User operator error.\n");
-        return -1;
+        user.userModify(uid, upasswd, uname, uaddress, utel);
+        cout << ("Insert user id [") << uid << ("] info complete!\n");
+        return 0;
       }
     }
     cout << ("Updating user info...\n");
     return 0;
   } else {
-    if (argc > 1)
-      cerr << argv[1] << (" is unknown command!\n");
-    else {
+    if (argc > 1) {
+      cerr.flags(ios::adjustfield);
+      cerr << setw(50) << ("Unknown command!\n");
+    } else {
       cerr << ("Please use '-h' or '--help' get help\n");
       return -1;
     }

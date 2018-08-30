@@ -25,7 +25,7 @@ bool systemEnder() {
 
   cout.flags(ios::adjustfield);
   cout << setw(45) << ("|______________|") << endl;
-  cout << setw(45) << ("|Create account|") << endl;
+  cout << setw(45) << ("|Ender  account|") << endl;
   cout << setw(45) << ("|______________|") << endl;
   // system name and passwd
   string adminName = "xcrj";
@@ -67,16 +67,17 @@ bool systemEnder() {
 void userMenu()
 {
   cout.flags(ios::adjustfield);
-  cout << setw(60) << ("|----------------+++++++++++++++++++++--------------------|\n");
-  cout << setw(60) << ("|                |Super Smart Manager|                    |\n");
-  cout << setw(60) << ("|----------------+++++++++++++++++++++--------------------|\n");
-  cout << setw(60) << ("|1.Initialize the number of users     6.Sort user info    |\n");
-  cout << setw(60) << ("|2.Create user info                   7.Classify user info|\n");
-  cout << setw(60) << ("|3.Delete user info                   8.Display user info |\n");
-  cout << setw(60) << ("|4.Search user info                   9.Save user info    |\n");
-  cout << setw(60) << ("|5.Modify user info                   10.Load user info   |\n");
-  cout << setw(60) << ("|                    0.Exit system                        |\n");
-  cout << setw(60) << ("|---------------------------------------------------------|\n");
+  cout << setw(70) << ("|-----------------+++++++++++++++++++++--------------------|\n");
+  cout << setw(70) << ("|                 |Super Smart Manager|                    |\n");
+  cout << setw(70) << ("|-----------------+++++++++++++++++++++--------------------|\n");
+  cout << setw(70) << ("|  Initialize user info    |             Sort user info    |\n");
+  cout << setw(70) << ("|  Create user info        |             Classify user info|\n");
+  cout << setw(70) << ("|  Delete user info        |             Display user info |\n");
+  cout << setw(70) << ("|  Search user info        |             Save user info    |\n");
+  cout << setw(70) << ("|  Modify user info        |             Load user info    |\n");
+  cout << setw(70) << ("|--------------------+++++++++++++-------------------------|\n");
+  cout << setw(70) << ("|                    |Exit system|                         |\n");
+  cout << setw(70) << ("|--------------------+++++++++++++-------------------------|\n");
 }
 
 
