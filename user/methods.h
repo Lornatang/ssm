@@ -52,12 +52,10 @@ void User::userInit() {
 void User::disUserInfo() {
   userNode *p;
   cout.flags(ios::left);
-  cout << setw(20) << ("id") << setw(20) << ("password") << setw(20) << ("name") << setw(20) << ("address") << setw(20)
-       << ("telephone\n");
+  cout << ("id passwd name address telephone\n");
   for (p = head->next; p != nullptr; p = p->next) {
     cout.flags(ios::left);
-    cout << setw(20) << p->id << setw(20) << p->passwd << setw(20) << p->name << setw(20) << p->address << setw(20)
-         << p->tel << endl;
+    cout << p->id << (" ") << p->passwd << (" ") << p->name << (" ") << p->address << (" ") << p->tel << ("\n");
   }
 }
 

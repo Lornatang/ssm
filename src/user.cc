@@ -25,7 +25,6 @@ int main(int argc, char const *argv[]) {
   char choice;
 
   system("clear");
-  user.userRead();
 
   if (argc < 2) {
     cerr << ("Please use '-h' or '--help' get help.\n");
@@ -98,6 +97,7 @@ int main(int argc, char const *argv[]) {
     user.userSave();
     return 0;
   } else if ((strcmp(argv[1], "-d") == 0) || (strcmp(argv[1], "--delete") == 0)) {
+    user.userRead();
     if (!systemEnder()) {
       cerr << ("System ender error.\n");
       return -1;
@@ -108,21 +108,20 @@ int main(int argc, char const *argv[]) {
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << ("Id: ");
     cin >> uid;
-    if (true) {
-      cout << ("Delete or delete after deletion(y/N)? ");
-      cin >> choice;
-      if (choice == 'y') {
-        user.userDelete(uid);
-        cout << ("Delete user id [") << uid << ("] info complete!\n");
-        user.userSave();
-        cout << ("Updating user info...\n");
-        return 0;
-      } else if (choice == 'N') {
-        cerr << ("User operator cancel.\n");
-        return -1;
-      }
+    cout << ("Delete or delete after deletion(y/N)? ");
+    cin >> choice;
+    if (choice == 'y') {
+      user.userDelete(uid);
+      cout << ("Delete user id [") << uid << ("] info complete!\n");
+      user.userSave();
+      cout << ("Updating user info...\n");
+      return 0;
+    } else if (choice == 'N') {
+      cerr << ("User operator cancel.\n");
+      return -1;
     }
   } else if ((strcmp(argv[1], "-s") == 0) || (strcmp(argv[1], "--show") == 0)) {
+    user.userRead();
     if (!systemEnder()) {
       cerr << ("System ender error.\n");
       return -1;
@@ -139,6 +138,7 @@ int main(int argc, char const *argv[]) {
          << (" telephone:") << u->tel;
     return 0;
   } else if ((strcmp(argv[1], "-m") == 0) || (strcmp(argv[1], "--modify") == 0)) {
+    user.userRead();
     if (!systemEnder()) {
       cerr << ("System ender error.\n");
       return -1;
@@ -173,6 +173,7 @@ int main(int argc, char const *argv[]) {
       }
     }
   } else if ((strcmp(argv[1], "-e") == 0) && (strcmp(argv[2], "-s") == 0)) {
+    user.userRead();
     cout << "Ascending Order or Descending Order (a/d/N): ";
     cin >> choice;
     if (choice == 'a')
@@ -186,6 +187,7 @@ int main(int argc, char const *argv[]) {
       user.userSort('>');
     return 0;
   } else if ((strcmp(argv[1], "-e") == 0) && (strcmp(argv[2], "-c") == 0)) {
+    user.userRead();
     cout << "classification: (y/N): ";
     cin >> choice;
     if (choice == 'y')
@@ -195,6 +197,7 @@ int main(int argc, char const *argv[]) {
       return -1;
     }
   } else if ((strcmp(argv[1], "-e") == 0) && (strcmp(argv[2], "-d") == 0)) {
+    user.userRead();
     cout << "Display user info: (y/N): ";
     cin >> choice;
     if (choice == 'y') {
