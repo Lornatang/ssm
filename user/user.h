@@ -36,7 +36,7 @@ struct userNode {
   string passwd;
   string name;
   string address;
-  int tel;
+  string tel;
   userNode *next;
 };
 class User {
@@ -50,20 +50,19 @@ class User {
                   const string &upasswd,
                   const string &uname,
                   const string &uaddress,
-                  int utel);  // insert user info to file
+                  const string &utel);  // insert user info to file
   void userDelete(int uid);    // delete user info
   userNode *userFind(int uid);   // find user info by user id
   void userModify(int uid,
                   const string &upasswd,
                   const string &uname,
                   const string &uaddress,
-                  int utel);   // modify user info
+                  const string &utel);   // modify user info
   void userCopy(userNode *ptemp, userNode *p);  // copy user info
   void userSort(char ch);
-  void userClassfy();
+  void userClassify();
   bool userRead();        //read data from file
   void userSave();        //save data to file
-  bool quit();
   void disUserInfo();     // display all user info
 };
 

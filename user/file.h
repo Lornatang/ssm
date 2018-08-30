@@ -27,7 +27,7 @@ bool User::userRead() {
     string passwd;
     string name;
     string address;
-    int tel;
+    string tel;
     in >> id >> passwd >> name >> address >> tel;
     userInsert(id, passwd, name, address, tel);
     flag = true;
@@ -45,27 +45,13 @@ void User::userSave() {
     return ;
   }
   while (p != nullptr) {
-    out << setw(20) << p->id;
-    out << setw(20) << p->name;
-    out << setw(20) << p->passwd;
-    out << setw(20) << p->address;
-    out << setw(20) << p->tel << "\n";
+    out << p->id;
+    out << p->name;
+    out << p->passwd;
+    out << p->address;
+    out << p->tel << "\n";
     p = p->next;
   }
 }
-
-//bool User::quit() {
-//  flag = userSave();
-//  if (!flag) {
-//    cerr << ("Data save is error.\n");
-//    cerr << ("Return status -1\n");
-//    return flag;
-//  } else {
-//    cout << ("Data saved! Exit system!\n");
-//    cout << ("Return status 0.\n");
-//    flag = true;
-//    return flag;
-//  }
-//}
 
 #endif //LORNABK_FILE_H

@@ -51,7 +51,7 @@ void User::disUserInfo() {
 }
 
 // insert student information (head interpolation)
-void User::userInsert(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel) {
+void User::userInsert(int uid, const string &upasswd, const string &uname, const string &uaddress, const string &utel) {
   userNode *p, *u;
   u = new userNode;
   u->id = uid;
@@ -104,7 +104,7 @@ userNode *User::userFind(int uid) {
 }
 
 // Modify student information (copy p information to tmp)
-void User::userModify(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel) {
+void User::userModify(int uid, const string &upasswd, const string &uname, const string &uaddress, const string &utel) {
   // Call the find function.
   userNode *userItem = userFind(uid);
   if (userItem != nullptr) {
@@ -161,7 +161,7 @@ void User::userSort(char ch) {
 }
 
 // Classify by user address
-void User::userClassfy() {
+void User::userClassify() {
   int address[3] = {0};
   userNode *p = head->next;
   while (p != nullptr) {
