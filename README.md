@@ -18,14 +18,14 @@ git clone https://github.com/lornatang/ssm.git
 - Run:
 
 Release:
-[latest release v0.0.3](https://github.com/Lornatang/ssm/releases/tag/v0.0.3)
+[v0.0.4](https://github.com/Lornatang/ssm/releases/tag/v0.0.4)
 
 Pre-release:
-[pre-release v0.0.3-beta-2](https://github.com/Lornatang/ssm/releases/tag/v0.0.3-beta.2)
+[v0.0.5-beta-1](https://github.com/Lornatang/ssm/releases/tag/v0.0.5-beta.1)
 
 **or**
 
-[Download tar.gz file](https://github.com/Lornatang/ssm/archive/v0.0.3.tar.gz)
+[Download tar.gz file](https://github.com/Lornatang/ssm/archive/v0.0.4.tar.gz)
 
 ### Build
 ```text
