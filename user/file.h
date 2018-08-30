@@ -22,7 +22,7 @@ void User::userRead() {
   ifstream in(userDataFile);
   if (!in) {
     cout << "None user info!" << endl;
-    return ;
+    return;
   }
   while (!in.eof()) {
     int id;
@@ -42,7 +42,7 @@ void User::userSave() {
   ofstream out(userDataFile);
   if (!out) {
     cerr << ("Can't open user data file!.\n");
-    return ;
+    return;
   }
   while (p != nullptr) {
     out << p->id << ("\t");

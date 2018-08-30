@@ -47,7 +47,7 @@ int main(int argc, char const *argv[]) {
     cout << ("-e -d                        \t --extend function (display by user id). \n");
     return 0;
   } else if ((strcmp(argv[1], "-v") == 0) || (strcmp(argv[1], "--version") == 0)) {
-    cout << ("Book store version 0.1.0-beta.1\n");
+    cout << ("Book store version 0.1.0\n");
     cout << ("Thread model: posix\n");
     cout << ("InstalledDir: /Library/Developer/CommandLineTools/usr/bin\n");
     return 0;
@@ -56,19 +56,18 @@ int main(int argc, char const *argv[]) {
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << setw(45) << ("|Init   user information|\n");
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
-    if (flag) {
-      cout << ("Init user info?(y/N)? ");
-      cin >> choice;
-      if (choice == 'y') {
-        user.userInit();
-        cout << ("Updating user info...\n");
-        user.userSave();
-        return 0;
-      } else if (choice == 'N') {
-        cerr << ("User operator cancel.\n");
-        return -1;
-      }
+    cout << ("Init user info?(y/N)? ");
+    cin >> choice;
+    if (choice == 'y') {
+      user.userInit();
+      cout << ("Updating user info...\n");
+      user.userSave();
+      return 0;
+    } else if (choice == 'N') {
+      cerr << ("User operator cancel.\n");
+      return -1;
     }
+
   } else if ((strcmp(argv[1], "-c") == 0) || (strcmp(argv[1], "--create") == 0)) {
     if (!systemEnder()) {
       cerr << ("System ender error.\n");
@@ -108,6 +107,12 @@ int main(int argc, char const *argv[]) {
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << ("Id: ");
     cin >> uid;
+    if (!checkAccount(to_string(uid))) {
+      cerr << ("Account id is exist!\n");
+    } else {
+      cerr << ("Account id don't exist.\n");
+      return -1;
+    }
     cout << ("Delete or delete after deletion(y/N)? ");
     cin >> choice;
     if (choice == 'y') {
@@ -132,6 +137,12 @@ int main(int argc, char const *argv[]) {
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << ("Id: ");
     cin >> uid;
+    if (!checkAccount(to_string(uid))) {
+      cerr << ("Account id is exist!\n");
+    } else {
+      cerr << ("Account id don't exist.\n");
+      return -1;
+    }
     u = user.userFind(uid);
     cout.flags(ios::left);
     cout << ("id:") << u->id << (" password:") << u->passwd << (" name:") << u->name << (" address:") << u->address
@@ -149,6 +160,12 @@ int main(int argc, char const *argv[]) {
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << ("Id: ");
     cin >> uid;
+    if (!checkAccount(to_string(uid))) {
+      cerr << ("Account id is exist!\n");
+    } else {
+      cerr << ("Account id don't exist.\n");
+      return -1;
+    }
     cout << ("Password: ");
     cin >> upasswd;
     cout << ("Name: ");
@@ -158,29 +175,29 @@ int main(int argc, char const *argv[]) {
     cout << ("Telephone: ");
     cin >> utel;
     // modify user info.
-    if (flag) {
-      cout << ("Do you want to modify this information(y/N)? ");
-      cin >> choice;
-      if (choice == 'y') {
-        user.userModify(uid, upasswd, uname, uaddress, utel);
-        cout << ("Modify user id [") << uid << ("] info complete!\n");
-        user.userSave();
-        cout << ("Updating user info...\n");
-        return 0;
-      } else if (choice == 'N') {
-        cerr << ("User operator cancel.\n");
-        return -1;
-      }
+    cout << ("Do you want to modify this information(y/N)? ");
+    cin >> choice;
+    if (choice == 'y') {
+      user.userModify(uid, upasswd, uname, uaddress, utel);
+      cout << ("Modify user id [") << uid << ("] info complete!\n");
+      user.userSave();
+      cout << ("Updating user info...\n");
+      return 0;
+    } else if (choice == 'N') {
+      cerr << ("User operator cancel.\n");
+      return -1;
     }
   } else if ((strcmp(argv[1], "-e") == 0) && (strcmp(argv[2], "-s") == 0)) {
     user.userRead();
     cout << "Ascending Order or Descending Order (a/d/N): ";
     cin >> choice;
-    if (choice == 'a')
-      user.userSort('<');
-    else if (choice == 'd')
+    if (choice == 'a') {
       user.userSort('>');
-    else if (choice == 'N') {
+      return 0;
+    } else if (choice == 'd') {
+      user.userSort('>');
+      return 0;
+    } else if (choice == 'N') {
       cerr << ("User operator cancel.\n");
       return -1;
     } else
@@ -190,9 +207,10 @@ int main(int argc, char const *argv[]) {
     user.userRead();
     cout << "classification: (y/N): ";
     cin >> choice;
-    if (choice == 'y')
+    if (choice == 'y') {
       user.userClassify();
-    else if (choice == 'N') {
+      return -1;
+    } else if (choice == 'N') {
       cerr << ("User operator cancel.\n");
       return -1;
     }

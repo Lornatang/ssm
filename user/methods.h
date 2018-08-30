@@ -21,7 +21,7 @@ void User::userInit() {
     u = new userNode;
     cout.flags(ios::adjustfield);
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
-    cout << setw(32) << i << ("\n");
+    cout << setw(32) << i + 1 << ("\n");
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << ("id: ");
     cin >> u->id;

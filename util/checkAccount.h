@@ -11,9 +11,11 @@ using namespace std;
 bool checkAccount(const string &id) {
   bool flag = true;
   ifstream ifs(userDataFile, ios::in);
-  if (!ifs)
+  if (!ifs) {
     cerr << "File open error." << endl;
-  else {
+    flag = false;
+    return flag;
+  } else {
     string word = string();
     while (ifs >> word) {
       if (word == id) {
