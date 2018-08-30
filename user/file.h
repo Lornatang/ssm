@@ -12,21 +12,24 @@
 #define SSM_USER_FILE_H
 
 #include "user.h"
+#include "base.h"
 using namespace std;
 
 //从文件读入数据
 bool User::userRead() {
-  User user;
-  ifstream in(userDataFile);
+  ifstream in("StudentList.txt");
   if (!in) {
-    cerr << ("Can't open user data file!.\n");
-    cerr << ("Return status -1.\n");
-    flag = false;
+    cout << "没有学生信息，请先录入学生信息!" << endl;
     return flag;
   }
   while (!in.eof()) {
-    in >> user.id >> user.passwd >> user.name >> user.address >> user.tel;
-    userInsert(user.id, user.passwd, user.name, user.address, user.tel);
+    int id;
+    string passwd;
+    string name;
+    string address;
+    int tel;
+    in >> id >> passwd >> name >> address >> tel;
+    userInsert(id, passwd, name, address, tel);
     flag = true;
   }
   return flag;
@@ -34,7 +37,7 @@ bool User::userRead() {
 
 //保存学生信息
 bool User::userSave() {
-  User *p;
+  userNode *p;
   p = head->next;
   ofstream out(userDataFile);
   if (!out) {
@@ -56,9 +59,7 @@ bool User::userSave() {
 }
 
 bool User::quit() {
-  User user;
-
-  flag = user.userSave();
+  flag = userSave();
   if (!flag) {
     cerr << ("Data save is error.\n");
     cerr << ("Return status -1\n");

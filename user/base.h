@@ -9,20 +9,18 @@
 #include "user.h"
 
 User::User() {
-  head = new User;
+  head = new userNode;
   head->next = nullptr;
 }
 
 User::~User() {
-  User *p;
-  while (head)
-  {
+  userNode *p;
+  while (head) {
     p = head;
     head = head->next;
     delete p;
   }
   head = nullptr;
 }
-
 
 #endif //SSM_BASE_H

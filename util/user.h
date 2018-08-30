@@ -12,10 +12,15 @@
 #ifndef LORNABK_UTIL_USER_H
 #define LORNABK_UTIL_USER_H
 
-#include "../user/user.h"
+#include <iostream>
+#include <iomanip>
+#include <unistd.h>
 using namespace std;
 
+
 bool systemEnder() {
+  bool flag = false;
+
   system("clear");
 
   cout.flags(ios::adjustfield);
@@ -61,7 +66,6 @@ bool systemEnder() {
 
 void userMenu()
 {
-  User user;
   cout.flags(ios::adjustfield);
   cout << setw(60) << ("|----------------+++++++++++++++++++++--------------------|\n");
   cout << setw(60) << ("|                |Super Smart Manager|                    |\n");

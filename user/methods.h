@@ -6,16 +6,15 @@
 #define SSM_USER_METHODS_H
 
 #include "user.h"
-#include "file.h"
 #include "base.h"
 
 // Init user numbers
 void User::userInit() {
   // users
   int n;
-  User *p, *u;
-  u = new User;
+  userNode *p, *u;
   p = head;
+  u = new userNode;
   cout << "Please input numbers: ";
   cin >> n;
   for (int i = 0; i < n; i++) {
@@ -34,7 +33,7 @@ void User::userInit() {
 
 // Print user info
 void User::disUserInfo() {
-  User *p;
+  userNode *p;
   cout.flags(ios::left);
   cout << setw(20) << ("id") << setw(20) << ("password") << setw(20) << ("name") << setw(20) << ("address") << setw(20)
        << ("telephone\n");
@@ -47,8 +46,8 @@ void User::disUserInfo() {
 
 // insert student information (head interpolation)
 void User::userInsert(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel) {
-  User *p, *u;
-  u = new User;
+  userNode *p, *u;
+  u = new userNode;
   u->id = uid;
   u->passwd = upasswd;
   u->name = uname;
@@ -62,7 +61,7 @@ void User::userInsert(int uid, const string &upasswd, const string &uname, const
 
 // Delete user info
 void User::userDelete(int uid) {
-  User *p, *tmp;
+  userNode *p, *tmp;
   p = head;
   tmp = p;
   /*cycle termination condition is p->next is not empty
@@ -82,8 +81,8 @@ void User::userDelete(int uid) {
 }
 
 // Find user info by id
-User *User::userFind(int uid) {
-  User *p;
+userNode *User::userFind(int uid) {
+  userNode *p;
   p = head->next;
   /*the termination condition is p->next is not empty
    * and the corresponding student number is not found
@@ -102,7 +101,7 @@ User *User::userFind(int uid) {
 // Modify student information (copy p information to tmp)
 void User::userModify(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel) {
   // Call the find function.
-  User *userItem = userFind(uid);
+  userNode *userItem = userFind(uid);
   if (userItem != nullptr) {
     userItem->id = uid;
     userItem->passwd = upasswd;
@@ -113,7 +112,7 @@ void User::userModify(int uid, const string &upasswd, const string &uname, const
 }
 
 // Copy student information (copy the information of p into tmp)
-void User::userCopy(User *p, User *tmp) {
+void User::userCopy(userNode *p, userNode *tmp) {
   if (p == nullptr) {
     cerr << ("Copy information cannot be empty.\n") << endl;
     cerr << ("Return status -1.\n");
@@ -129,10 +128,10 @@ void User::userCopy(User *p, User *tmp) {
 // Sort by user id
 void User::userSort(char ch) {
   if (ch == '>') {
-    for (User *p = head->next; p != nullptr; p = p->next) {
-      for (User *q = head->next; q != nullptr; q = q->next) {
+    for (userNode *p = head->next; p != nullptr; p = p->next) {
+      for (userNode *q = head->next; q != nullptr; q = q->next) {
         if (p->id > q->id) {
-          User *tmp = new User;
+          auto *tmp = new userNode;
           userCopy(tmp, p);
           userCopy(p, q);
           userCopy(q, tmp);
@@ -140,10 +139,10 @@ void User::userSort(char ch) {
       }
     }
   } else if (ch == '<') {
-    for (User *p = head->next; p != nullptr; p = p->next) {
-      for (User *q = head->next; q != nullptr; q = q->next) {
+    for (userNode *p = head->next; p != nullptr; p = p->next) {
+      for (userNode *q = head->next; q != nullptr; q = q->next) {
         if (p->id < q->id) {
-          User *tmp = new User;
+          auto *tmp = new userNode;
           userCopy(tmp, p);
           userCopy(p, q);
           userCopy(q, tmp);
@@ -159,7 +158,7 @@ void User::userSort(char ch) {
 // Classify by user address
 void User::userClassfy() {
   int address[3] = {0};
-  User *p = head->next;
+  userNode *p = head->next;
   while (p != nullptr) {
     if ("1601" == p->address) {
       address[0] += 1;
@@ -168,15 +167,15 @@ void User::userClassfy() {
     } else if ("1603" == p->address) {
       address[2] += 1;
     }
-      p = p->next;
-    }
-    cout.flags(ios::left);
-    cout << setw(20) << ("1601") << setw(20) << ("1602") << setw(20) << ("1603\n");
-    for (int i: address) {
-      cout.flags(ios::left);
-      cout << setw(20) << address[i];
-    }
-    cout << endl;
+    p = p->next;
   }
+  cout.flags(ios::left);
+  cout << setw(20) << ("1601") << setw(20) << ("1602") << setw(20) << ("1603\n");
+  for (int i : address) {
+    cout.flags(ios::left);
+    cout << setw(20) << i;
+  }
+  cout << endl;
+}
 
 #endif //SSM_METHODS_H

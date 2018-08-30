@@ -35,56 +35,35 @@ bool flag = false;
 #include <unistd.h>
 using namespace std;
 
-class User {
- public:
+
+struct userNode {
   int id;
   string passwd;
   string name;
   string address;
   int tel;
+  userNode *next;
+};
+class User {
+  userNode *head;
+
  public:
   User();
   ~User();
-  int getId() const {
-    return id;
-  }
-  void setId(int id) {
-    User::id = id;
-  }
-  const string &getPasswd() const {
-    return passwd;
-  }
-  void setPasswd(const string &passwd) {
-    User::passwd = passwd;
-  }
-  const string &getName() const {
-    return name;
-  }
-  void setName(const string &name) {
-    User::name = name;
-  }
-  const string &getAddress() const {
-    return address;
-  }
-  void setAddress(const string &address) {
-    User::address = address;
-  }
-  int getTel() const {
-    return tel;
-  }
-  void setTel(int tel) {
-    User::tel = tel;
-  }
-
-  User *next;
-  User *head;
-
   void userInit();  // create user info
-  void userInsert(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel);  // insert user info to file
+  void userInsert(int uid,
+                  const string &upasswd,
+                  const string &uname,
+                  const string &uaddress,
+                  int utel);  // insert user info to file
   void userDelete(int uid);    // delete user info
-  User *userFind(int uid);   // find user info by user id
-  void userModify(int uid, const string &upasswd, const string &uname, const string &uaddress, int utel);   // modify user info
-  void userCopy(User *ptemp, User *p);  // copy user info
+  userNode *userFind(int uid);   // find user info by user id
+  void userModify(int uid,
+                  const string &upasswd,
+                  const string &uname,
+                  const string &uaddress,
+                  int utel);   // modify user info
+  void userCopy(userNode *ptemp, userNode *p);  // copy user info
   void userSort(char ch);
   void userClassfy();
   bool userRead();        //read data from file
