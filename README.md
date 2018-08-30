@@ -21,7 +21,7 @@ Release:
 [v0.0.5](https://github.com/Lornatang/ssm/releases/tag/v0.0.5)
 
 Pre-release:
-[v0.0.5-beta-1](https://github.com/Lornatang/ssm/releases/tag/v0.0.5-beta.1)
+[v0.1.0-beta-1](https://github.com/Lornatang/ssm/releases/tag/v0.1.0-beta.1)
 
 **or**
 
