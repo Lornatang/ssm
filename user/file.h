@@ -45,10 +45,10 @@ void User::userSave() {
     return ;
   }
   while (p != nullptr) {
-    out << p->id;
-    out << p->name;
-    out << p->passwd;
-    out << p->address;
+    out << p->id << ("\t");
+    out << p->name << ("\t");
+    out << p->passwd << ("\t");
+    out << p->address << ("\t");
     out << p->tel << "\n";
     p = p->next;
   }

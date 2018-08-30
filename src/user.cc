@@ -58,7 +58,7 @@ int main(int argc, char const *argv[]) {
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     if (flag) {
       cout << ("Init user info?(y/N)? ");
-      cin >> choice;
+      choice = getchar();
       if (choice == 'y') {
         user.userInit();
         cout << ("Updating user info...\n");
@@ -81,19 +81,13 @@ int main(int argc, char const *argv[]) {
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << setw(45) << ("|Insert user information|\n");
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
-    cout << ("Id: ");
-    cin >> setw(20) >> uid;
-    cout << ("Password: ");
-    cin >> setw(20) >> upasswd;
-    cout << ("Name: ");
-    cin >> setw(20) >> uname;
-    cout << ("Address: ");
-    cin >> setw(20) >> uaddress;
-    cout << ("Telephone: ");
-    cin >> setw(20) >> utel;
+    cout << ("Id: "); cin >> uid;
+    cout << ("Password: "); cin >> upasswd;
+    cout << ("Name: "); cin >> uname;
+    cout << ("Address: "); cin >> uaddress;
+    cout << ("Telephone: "); cin >> utel;
     cout << ("Do you want to add this information(y/N)? ");
-    cin >> choice;
-    getchar();
+    choice = getchar();
     if (choice == 'y') {
       user.userInsert(uid, upasswd, uname, uaddress, utel);
       cout << ("Insert user id [") << uid << ("] info complete!\n");
@@ -123,7 +117,7 @@ int main(int argc, char const *argv[]) {
     cin >> uid;
     if (flag) {
       cout << ("Delete or delete after deletion(y/N)? ");
-      cin >> choice;
+      choice = getchar();
       if (choice == 'y') {
         user.userDelete(uid);
         cout << ("Delete user id [") << uid << ("] info complete!\n");
@@ -134,7 +128,7 @@ int main(int argc, char const *argv[]) {
         cerr << ("User operator cancel.\n");
         return -1;
       } else {
-        user.userModify(uid, upasswd, uname, uaddress, utel);
+        user.userDelete(uid);
         cout << ("Insert user id [") << uid << ("] info complete!\n");
         user.userSave();
         cout << ("Updating user info...\n");
@@ -152,13 +146,9 @@ int main(int argc, char const *argv[]) {
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << ("Id: ");
     cin >> uid;
-    //user.userRead();
     u = user.userFind(uid);
     cout.flags(ios::left);
-    cout << setw(20) << ("id") << setw(20) << ("password") << setw(20) << ("name") << setw(20) << ("address")
-         << setw(20) << ("telephone\n");
-    cout << setw(20) << u->id << setw(20) << u->passwd << setw(20) << u->name << setw(20) << u->address << setw(20)
-         << u->tel;
+    cout << ("id:") << u->id << (" password:") << u->passwd << (" name:") << u->name << (" address:") << u->address << (" telephone:") << u->tel;
     return 0;
   } else if ((strcmp(argv[1], "-m") == 0) || (strcmp(argv[1], "--modify") == 0)) {
     if (!systemEnder()) {
@@ -182,7 +172,7 @@ int main(int argc, char const *argv[]) {
     // modify user info.
     if (flag) {
       cout << ("Do you want to add this information(y/N)? ");
-      cin >> choice;
+      choice = getchar();
       if (choice == 'y') {
         user.userModify(uid, upasswd, uname, uaddress, utel);
         cout << ("Insert user id [") << uid << ("] info complete!\n");
@@ -202,9 +192,9 @@ int main(int argc, char const *argv[]) {
     }
     cout << ("Updating user info...\n");
     return 0;
-  } else if ((strcmp(argv[1], "-e") == 0) || (strcmp(argv[2], "--s") == 0)) {
+  } else if ((strcmp(argv[1], "-e") == 0) && (strcmp(argv[2], "-s") == 0)) {
     cout << "Ascending Order or Descending Order (a/d/N): ";
-    cin >> choice;
+    choice = getchar();
     if (choice == 'a')
       user.userSort('<');
     else if (choice == 'd')
@@ -215,9 +205,9 @@ int main(int argc, char const *argv[]) {
     } else
       user.userSort('>');
     return 0;
-  } else if ((strcmp(argv[1], "-e") == 0) || (strcmp(argv[2], "--c") == 0)) {
+  } else if ((strcmp(argv[1], "-e") == 0) && (strcmp(argv[2], "-c") == 0)) {
     cout << "classification: (y/N): ";
-    cin >> choice;
+    choice = getchar();
     if (choice == 'y')
       user.userClassify();
     else if (choice == 'N') {
@@ -226,9 +216,9 @@ int main(int argc, char const *argv[]) {
     } else
       user.userClassify();
     return 0;
-  } else if ((strcmp(argv[1], "-e") == 0) || (strcmp(argv[2], "--d") == 0)) {
+  } else if ((strcmp(argv[1], "-e") == 0) && (strcmp(argv[2], "-d") == 0)) {
     cout << "Display user info: (y/N): ";
-    cin >> choice;
+    choice = getchar();
     if (choice == 'y')
       user.disUserInfo();
     else if (choice == 'N') {
