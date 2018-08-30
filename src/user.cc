@@ -8,6 +8,7 @@
 #include "../user/base.h"
 #include "../user/file.h"
 #include "../user/methods.h"
+#include "../util/checkAccount.h"
 using namespace std;
 
 int main(int argc, char const *argv[]) {
@@ -58,18 +59,15 @@ int main(int argc, char const *argv[]) {
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     if (flag) {
       cout << ("Init user info?(y/N)? ");
-      choice = getchar();
+      cin >> choice;
       if (choice == 'y') {
         user.userInit();
         cout << ("Updating user info...\n");
+        user.userSave();
         return 0;
       } else if (choice == 'N') {
         cerr << ("User operator cancel.\n");
         return -1;
-      } else {
-        user.userInit();
-        cout << ("Updating user info...\n");
-        return 0;
       }
     }
   } else if ((strcmp(argv[1], "-c") == 0) || (strcmp(argv[1], "--create") == 0)) {
@@ -81,29 +79,24 @@ int main(int argc, char const *argv[]) {
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << setw(45) << ("|Insert user information|\n");
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
-    cout << ("Id: "); cin >> uid;
-    cout << ("Password: "); cin >> upasswd;
-    cout << ("Name: "); cin >> uname;
-    cout << ("Address: "); cin >> uaddress;
-    cout << ("Telephone: "); cin >> utel;
-    cout << ("Do you want to add this information(y/N)? ");
-    choice = getchar();
-    if (choice == 'y') {
-      user.userInsert(uid, upasswd, uname, uaddress, utel);
-      cout << ("Insert user id [") << uid << ("] info complete!\n");
-      user.userSave();
-      cout << ("Updating user info...\n");
-      return 0;
-    } else if (choice == 'N') {
-      cerr << ("User operator cancel.\n");
+    cout << ("Id: ");
+    cin >> uid;
+    if (!checkAccount(to_string(uid))) {
+      cerr << ("Account id is exist!\n");
       return -1;
-    } else {
-      user.userInsert(uid, upasswd, uname, uaddress, utel);
-      cout << ("Insert user id [") << uid << ("] info complete!\n");
-      user.userSave();
-      cout << ("Updating user info...\n");
-      return 0;
     }
+    cout << ("Password: ");
+    cin >> upasswd;
+    cout << ("Name: ");
+    cin >> uname;
+    cout << ("Address: ");
+    cin >> uaddress;
+    cout << ("Telephone: ");
+    cin >> utel;
+    user.userInsert(uid, upasswd, uname, uaddress, utel);
+    cout << ("Insert user id [") << uid << ("] info complete!\n");
+    user.userSave();
+    return 0;
   } else if ((strcmp(argv[1], "-d") == 0) || (strcmp(argv[1], "--delete") == 0)) {
     if (!systemEnder()) {
       cerr << ("System ender error.\n");
@@ -115,9 +108,9 @@ int main(int argc, char const *argv[]) {
     cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
     cout << ("Id: ");
     cin >> uid;
-    if (flag) {
+    if (true) {
       cout << ("Delete or delete after deletion(y/N)? ");
-      choice = getchar();
+      cin >> choice;
       if (choice == 'y') {
         user.userDelete(uid);
         cout << ("Delete user id [") << uid << ("] info complete!\n");
@@ -127,12 +120,6 @@ int main(int argc, char const *argv[]) {
       } else if (choice == 'N') {
         cerr << ("User operator cancel.\n");
         return -1;
-      } else {
-        user.userDelete(uid);
-        cout << ("Insert user id [") << uid << ("] info complete!\n");
-        user.userSave();
-        cout << ("Updating user info...\n");
-        return 0;
       }
     }
   } else if ((strcmp(argv[1], "-s") == 0) || (strcmp(argv[1], "--show") == 0)) {
@@ -148,7 +135,8 @@ int main(int argc, char const *argv[]) {
     cin >> uid;
     u = user.userFind(uid);
     cout.flags(ios::left);
-    cout << ("id:") << u->id << (" password:") << u->passwd << (" name:") << u->name << (" address:") << u->address << (" telephone:") << u->tel;
+    cout << ("id:") << u->id << (" password:") << u->passwd << (" name:") << u->name << (" address:") << u->address
+         << (" telephone:") << u->tel;
     return 0;
   } else if ((strcmp(argv[1], "-m") == 0) || (strcmp(argv[1], "--modify") == 0)) {
     if (!systemEnder()) {
@@ -171,30 +159,22 @@ int main(int argc, char const *argv[]) {
     cin >> utel;
     // modify user info.
     if (flag) {
-      cout << ("Do you want to add this information(y/N)? ");
-      choice = getchar();
+      cout << ("Do you want to modify this information(y/N)? ");
+      cin >> choice;
       if (choice == 'y') {
         user.userModify(uid, upasswd, uname, uaddress, utel);
-        cout << ("Insert user id [") << uid << ("] info complete!\n");
+        cout << ("Modify user id [") << uid << ("] info complete!\n");
         user.userSave();
         cout << ("Updating user info...\n");
         return 0;
       } else if (choice == 'N') {
         cerr << ("User operator cancel.\n");
         return -1;
-      } else {
-        user.userModify(uid, upasswd, uname, uaddress, utel);
-        cout << ("Insert user id [") << uid << ("] info complete!\n");
-        user.userSave();
-        cout << ("Updating user info...\n");
-        return 0;
       }
     }
-    cout << ("Updating user info...\n");
-    return 0;
   } else if ((strcmp(argv[1], "-e") == 0) && (strcmp(argv[2], "-s") == 0)) {
     cout << "Ascending Order or Descending Order (a/d/N): ";
-    choice = getchar();
+    cin >> choice;
     if (choice == 'a')
       user.userSort('<');
     else if (choice == 'd')
@@ -207,26 +187,23 @@ int main(int argc, char const *argv[]) {
     return 0;
   } else if ((strcmp(argv[1], "-e") == 0) && (strcmp(argv[2], "-c") == 0)) {
     cout << "classification: (y/N): ";
-    choice = getchar();
+    cin >> choice;
     if (choice == 'y')
       user.userClassify();
     else if (choice == 'N') {
       cerr << ("User operator cancel.\n");
       return -1;
-    } else
-      user.userClassify();
-    return 0;
+    }
   } else if ((strcmp(argv[1], "-e") == 0) && (strcmp(argv[2], "-d") == 0)) {
     cout << "Display user info: (y/N): ";
-    choice = getchar();
-    if (choice == 'y')
+    cin >> choice;
+    if (choice == 'y') {
       user.disUserInfo();
-    else if (choice == 'N') {
+      return 0;
+    } else if (choice == 'N') {
       cerr << ("User operator cancel.\n");
       return -1;
-    } else
-      user.disUserInfo();
-    return 0;
+    }
   } else {
     if (argc > 1) {
       cerr.flags(ios::adjustfield);

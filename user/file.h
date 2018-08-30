@@ -16,11 +16,13 @@
 using namespace std;
 
 //从文件读入数据
-bool User::userRead() {
+void User::userRead() {
+  userNode *p;
+  p = head;
   ifstream in(userDataFile);
   if (!in) {
     cout << "None user info!" << endl;
-    return flag;
+    return ;
   }
   while (!in.eof()) {
     int id;
@@ -30,9 +32,7 @@ bool User::userRead() {
     string tel;
     in >> id >> passwd >> name >> address >> tel;
     userInsert(id, passwd, name, address, tel);
-    flag = true;
   }
-  return flag;
 }
 
 //保存学生信息

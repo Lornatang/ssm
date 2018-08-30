@@ -7,7 +7,7 @@
 
 #include "user.h"
 #include "base.h"
-
+#include "../util/checkAccount.h"
 // Init user numbers
 void User::userInit() {
   // users
@@ -19,20 +19,31 @@ void User::userInit() {
   cin >> n;
   for (int i = 0; i < n; i++) {
     u = new userNode;
-    cout << ("id: "); cin >> u->id;
-    cout << ("password: "); cin >> u->passwd;
-    cout << ("name: "); cin >> u->name;
-    cout << ("address: "); cin >> u->address;
-    cout << ("tel: "); cin >> u->tel;
+    cout.flags(ios::adjustfield);
+    cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
+    cout << setw(32) << i << ("\n");
+    cout << setw(45) << ("|-+-+-+-+-+-+-+-+-+-+-+-|\n");
+    cout << ("id: ");
+    cin >> u->id;
+    if (!checkAccount(to_string(u->id))) {
+      cerr << ("Account id is exist!\n");
+      return;
+    }
+    cout << ("password: ");
+    cin >> u->passwd;
+    cout << ("name: ");
+    cin >> u->name;
+    cout << ("address: ");
+    cin >> u->address;
+    cout << ("tel: ");
+    cin >> u->tel;
 
     u->next = p->next;
     p->next = u;
     p = p->next;
   }
-  if (p == nullptr)   //判断学生信息表是否创建成功
-  {
+  if (p == nullptr) {
     cerr << ("Init error. Please re-operate.\n");
-    cerr << ("Return status -1.\n");
     userInit();
   }
 }
@@ -93,11 +104,12 @@ userNode *User::userFind(int uid) {
   /*the termination condition is p->next is not empty
    * and the corresponding student number is not found
    */
-  while (p->next && p->id != uid)
+  while (p->next && p->id != uid) {
     p = p->next;
-  if (p->id == uid)
+  }
+  if (p->id == uid) {
     return p;
-  else {
+  } else {
     cerr << ("Can't find id [") << uid << ("] information!\n");
     return nullptr;
   }
@@ -117,7 +129,7 @@ void User::userModify(int uid, const string &upasswd, const string &uname, const
 }
 
 // Copy student information (copy the information of p into tmp)
-void User::userCopy(userNode *p, userNode *tmp) {
+void User::userCopy(userNode *tmp, userNode *p) {
   if (p == nullptr) {
     cerr << ("Copy information cannot be empty.\n") << endl;
     return;
@@ -156,7 +168,7 @@ void User::userSort(char ch) {
     }
   } else {
     cerr << ("Operator error!\n");
-    cerr << ("Return status -1.\n");
+    return;
   }
 }
 
@@ -175,10 +187,10 @@ void User::userClassify() {
     p = p->next;
   }
   cout.flags(ios::left);
-  cout << setw(20) << ("1601") << setw(20) << ("1602") << setw(20) << ("1603\n");
+  cout << ("1601 ") << ("1602 ") << ("1603\n");
   for (int i : address) {
     cout.flags(ios::left);
-    cout << setw(20) << i;
+    cout << i << ("    ");
   }
   cout << endl;
 }

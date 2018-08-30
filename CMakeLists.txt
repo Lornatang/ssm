@@ -5,7 +5,7 @@ SET(CMAKE_CXX_STANDARD 17)
 
 add_library(user STATIC src/user.cc)
 
-add_executable(ssm user/user.h src/user.cc user/file.h util/user.h user/base.h user/methods.h)
+add_executable(ssm user/user.h src/user.cc user/file.h util/user.h user/base.h user/methods.h util/checkAccount.h)
 
 install(TARGETS ssm RUNTIME DESTINATION bin)
 install(TARGETS user ARCHIVE DESTINATION ssm/lib)

@@ -28,6 +28,7 @@ bool flag = false;
 #include <cstdlib>
 #include <iomanip>
 #include <unistd.h>
+#include <vector>
 using namespace std;
 
 
@@ -61,7 +62,7 @@ class User {
   void userCopy(userNode *ptemp, userNode *p);  // copy user info
   void userSort(char ch);
   void userClassify();
-  bool userRead();        //read data from file
+  void userRead();        //read data from file
   void userSave();        //save data to file
   void disUserInfo();     // display all user info
 };
